@@ -48,6 +48,7 @@ public class ItemEbonSpade extends ItemTool implements ITextureProvider
             EntityPlayer ep = mc.thePlayer;
             ep.addChatMessage("I seem to have dug some corpse dust.");
             ep.dropItemWithOffset(mod_Ebon.corpsedust.shiftedIndex, 1, 0.0F);
+            entityliving.worldObj.playSoundAtEntity(entityliving, "vazkii.ebonmod.tool", 1.0F, 1.0F);
             EbonAPI.addMagicalExhaustionOnPlayerFor(3);
             return super.onBlockDestroyed(itemstack, i, j, k, l, entityliving);
         } else

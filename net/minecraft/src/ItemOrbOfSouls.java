@@ -26,6 +26,7 @@ public class ItemOrbOfSouls extends ItemEbonMod
         super(i);
         mc = ModLoader.getMinecraftInstance();
         intToDamage = j;
+        setNoRepair();
         setMaxDamage(j);
         setMaxStackSize(1);
     }
@@ -36,7 +37,7 @@ public class ItemOrbOfSouls extends ItemEbonMod
         double d1 = entityliving.posY;
         double d2 = entityliving.posZ;
         EntityPlayerSP entityplayersp = mc.thePlayer;
-        if(entityliving instanceof EntityEbonGhost && !EbonAPI.doesPlayerHaveMagicExhaustion())
+        if(entityliving instanceof EntityEbonGhost && entityliving.health == 20000 && !EbonAPI.doesPlayerHaveMagicExhaustion())
         {
             if(!itemstack.isItemDamaged())
             {
@@ -50,7 +51,7 @@ public class ItemOrbOfSouls extends ItemEbonMod
                     entityliving.worldObj.spawnParticle("portal", entityliving.posX + (random.nextDouble() - 0.5D) * (double)entityliving.width, (entityliving.posY + random.nextDouble() * (double)entityliving.height) - 0.25D, entityliving.posZ + (random.nextDouble() - 0.5D) * (double)entityliving.width, (random.nextDouble() - 0.5D) * 2D, -random.nextDouble(), (random.nextDouble() - 0.5D) * 2D);
                 }
 
-                entityliving.worldObj.playSoundEffect(d, d1, d2, "mob.blaze.breathe", 1.0F, 1.0F);
+                entityliving.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.absorb", 1.0F, 1.0F);
                 entityliving.setDead();
                 thisDmg = itemstack.getItemDamage();
                 thisDmg--;
@@ -66,11 +67,11 @@ public class ItemOrbOfSouls extends ItemEbonMod
                 }
             } else
             {
-                entityliving.worldObj.playSoundEffect(d, d1, d2, "mob.endermen.portal", 1.0F, 1.0F);
+                entityliving.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.fail", 1.0F, 1.0F);
             }
         } else
         {
-            entityliving.worldObj.playSoundEffect(d, d1, d2, "mob.endermen.portal", 1.0F, 1.0F);
+            entityliving.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.fail", 1.0F, 1.0F);
         }
         if(!(entityliving instanceof EntityEbonGhost))
         {

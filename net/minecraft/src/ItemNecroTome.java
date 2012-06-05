@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import java.util.List;
+import java.util.Random;
 
 public class ItemNecroTome extends ItemEbonMod {
 
@@ -11,6 +12,23 @@ public class ItemNecroTome extends ItemEbonMod {
 		setNoRepair();
 	}
 	
+	private String[] messages = new String[]{
+			"Chapter 1: Tormented Souls are know to be vulnerable to the hit of an ebon blade.",
+			"Chapter 2: Phantom Chests don't vanish if they're unlocked.",
+			"Chapter 3: Vazkii is one sneaky son of a sweetheart...",
+			"Chapter 4: Corpse Dust is know to be reinvigorating to undead.",
+			"Chapter 5: Ebon Staffs are know to pull out interesting information out of bookshelves.",
+			"Chapter 6: Blood Leaves can harness mystical energy from the Ebon Staff.",
+			"Chapter 7: Snow Golems resemble Villagers in a way right?",
+			"Chapter 8: Ebon Armor can drain hits from undead.",
+			"Chapter 9: Phantom Chests keep their chunk loaded.",
+			"Chapter 10: Soul energy is know to create mushrooms in living beings"
+	};
+	
+	private String[] colors = new String[]{ "§c", "§9" };
+	int color = 0;
+	int lastMessage = 11;
+	
 	public boolean damageItemWithNotify(ItemStack itemstack, int i, EntityPlayer entityplayer){
 		if(itemstack.getItemDamage() != 256){
 		itemstack.damageItem(i, entityplayer);
@@ -19,6 +37,19 @@ public class ItemNecroTome extends ItemEbonMod {
 		}entityplayer.addChatMessage("Spell Failed"); 
 			return false;
 	}
+	
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    {
+    	par2World.playSoundAtEntity(par3EntityPlayer, "vazkii.ebonmod.tome", 1.0F, 1.0F);
+    	int m;
+    	do{
+    		m = new Random().nextInt(10);
+    	}while(m == lastMessage);
+			par3EntityPlayer.addChatMessage(colors[color] + messages[m]);
+			lastMessage = m;
+    	if(color == 0) color++; else color--;
+    	return par1ItemStack;
+    }
 	
     public EnumRarity getRarity(ItemStack itemstack)
     {

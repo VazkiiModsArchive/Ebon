@@ -27,17 +27,21 @@ public class ItemEbonStaff extends Ebon3DItems
         double d2 = entityplayer.posZ;	
         
         if(EbonAPI.esEvents.containsKey(i1) && !EbonAPI.doesPlayerHaveMagicExhaustion() && EbonAPI.esEvents.get(i1).canDoEvent(world, i, j, k)){
-        	if(EbonAPI.esEvents.get(i1).requiresTome() && (!EbonAPI.hasNecroTome() || !((ItemNecroTome)EbonAPI.getNecroTome().getItem()).damageItemWithNotify(EbonAPI.getNecroTome(), 1, entityplayer))) return false;
+        	if(EbonAPI.esEvents.get(i1).requiresTome() && (!EbonAPI.hasNecroTome() || !((ItemNecroTome)EbonAPI.getNecroTome().getItem()).damageItemWithNotify(EbonAPI.getNecroTome(), 1, entityplayer))){
+        		entityplayer.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.fail", 1.0F, 1.0F);
+        		return false;
+        	}
 
         	EbonAPI_EbonStaffEvent event = EbonAPI.esEvents.get(i1);
         	event.doEventAt(world, i, j, k);
             doDamageCalc(itemstack, entityplayer);
             doParticles(world, i, j, k);
+            entityplayer.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.transmute", 1.0F, 1.0F);
             EbonAPI.addMagicalExhaustionOnPlayerFor(2);
             return true;
         }
 
-        entityplayer.worldObj.playSoundEffect(d, d1, d2, "mob.endermen.portal", 1.0F, 1.0F);
+        entityplayer.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.fail", 1.0F, 1.0F);
         return false;
     }
     
