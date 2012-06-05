@@ -1,6 +1,7 @@
 
 package net.minecraft.src;
 
+import java.io.File;
 import java.util.Map;
 import java.util.Random;
 import java.util.List;
@@ -8,11 +9,13 @@ import java.util.Iterator;
 
 import net.minecraft.src.forge.IBonemealHandler;
 import net.minecraft.src.forge.IDestroyToolHandler;
+import net.minecraft.src.forge.ISoundHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.vazkii.updatemanager.IUMAdvanced;
 import net.minecraft.src.vazkii.updatemanager.IUpdateManager;
 import net.minecraft.src.vazkii.updatemanager.ModType;
+import net.minecraft.src.vazkii.updatemanager.UMCore;
 import net.minecraft.client.Minecraft;
 
 public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
@@ -21,6 +24,8 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public mod_Ebon()
     {  	
     	new ForgeHooks();
+    	
+    	UMCore.addMod(this);
 
     	ModLoader.setInGameHook(this, true, true);
     	ModLoader.setInGUIHook(this, true, true);
@@ -55,7 +60,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ebonpick = (new ItemEbonPick(ebonpickID, EnumToolMaterial.EMERALD)).setIconCoord(5, 5).setItemName("ebonpick");
         ebonspade = (new ItemEbonSpade(ebonspadeID, EnumToolMaterial.EMERALD)).setIconCoord(6, 5).setItemName("ebonspade");
         ebonax = (new ItemEbonAx(ebonaxID, EnumToolMaterial.EMERALD)).setIconCoord(7, 5).setItemName("ebonaxe");
-        corpsedust = (new ItemEbonMod(corpsedustID)).setIconCoord(0, 5).setItemName("corpsedust");
+        corpsedust = (new ItemCorpseDust(corpsedustID)).setIconCoord(0, 5).setItemName("corpsedust");
         deaddust = (new ItemEbonMod(deaddustID)).setIconCoord(1, 5).setItemName("deaddust");
         ebongem = (new ItemEbonMod(ebongemID)).setIconCoord(3, 5).setItemName("ebongem");
         ebonsword = (new ItemEbonSword(ebonswordID, EnumToolMaterial.EMERALD)).setIconCoord(4, 5).setItemName("ebonsword");
@@ -73,7 +78,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ebonscepter = (new ItemEbonScepter(ebonscepterID, EnumRarity.rare)).setMaxStackSize(1).setIconCoord(8, 6).setItemName("ebonscepter");
         tsEgg = (new ItemTSEgg(tsEggID, "EbonGhost", 0xB3B3B3)).setIconCoord(9, 9).setItemName("tsEgg");
         fsEgg = (new ItemTSEgg(fsEggID, "Strange Ghost", 0x230B0B)).setIconCoord(9, 9).setItemName("fsEgg");
-        mortarPestle = (new ItemEbonMod(mortarPestleID)).setMaxStackSize(1).setContainerItem(mortarPestle).setIconCoord(9, 6).setItemName("mortarPestle");  
+        mortarPestle = (new ItemGrindstone(mortarPestleID)).setMaxStackSize(1).setIconCoord(9, 6).setItemName("mortarPestle");  
         bloodPowder = (new ItemEbonMod(bloodPowderID)).setIconCoord(11, 6).setItemName("bloodPowder");
         bloodSeeds = (new ItemBloodSeed(bloodSeedsID, bloodCrops.blockID, quicksand.blockID)).setIconCoord(12, 6).setItemName("bloodSeeds");
         bloodLeaf = (new ItemEbonMod(bloodLeafID)).setIconCoord(13, 6).setPotionEffect("+4").setItemName("bloodLeaf");
@@ -91,9 +96,9 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         mobSpawnerItem = (new ItemMobSpawnerItem(mobSpawnerItemID)).setIconCoord(1, 4).setItemName("mobSpawnerItem");
         phantomKey = (new ItemEbonMod(phantomKeyID)).setIconCoord(8, 7).setMaxStackSize(8).setItemName("phantomKey");
         altarBlueprint = (new ItemEbonAltarBlueprint(altarBlueprintID)).setIconCoord(12, 3).setItemName("altarBlueprint");
-        
-        mortarPestle.setContainerItem(mortarPestle);
 
+        mortarPestle.setContainerItem(mortarPestle);
+        
         ModLoader.addName(ebonpick, "Ebon Pick");
         ModLoader.addName(ebonspade, "Ebon Spade");
         ModLoader.addName(ebonax, "Ebon Hatchet");
@@ -578,6 +583,12 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     		hasJumpTicked = false;
     	}
     	
+    	//Exhaustion Clearance handler
+    	exNow = minecraft.thePlayer.activePotionsMap.containsKey(new PotionEffect(mod_Ebon.magicExhaustion.id, 1, 0).getPotionID());
+    	if(exLast && !exNow)
+    	minecraft.thePlayer.worldObj.playSoundAtEntity(minecraft.thePlayer, "vazkii.ebonmod.clearExhaustion", 1.0F, 1.0F);
+    	exLast = minecraft.thePlayer.activePotionsMap.containsKey(new PotionEffect(mod_Ebon.magicExhaustion.id, 1, 0).getPotionID());
+    	
     	//Armor Souls Tick
     	if(!mc.thePlayer.inventory.hasItemStack(new ItemStack(soulStone, 1, 1)) && !EbonAPI.doesPlayerHaveMagicExhaustion()){
     	
@@ -750,7 +761,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 
     public String getVersion()
     {
-        return "by Vazkii. Version [3.1.1] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
+        return "by Vazkii. Version [3.1.2] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
     
     public void load(){
@@ -762,6 +773,9 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public int[] spawnersList = new int[]{
     		50, 51, 52, 54, 53, 55, 56, 57, 58, 59, 60, 61, 62, 90, 91, 92, 93, 94, 95, 96, 98, 120, 97, 99
     };
+    
+    private static boolean exLast;
+    private static boolean exNow;
     
     private static EntityLiving currentLivingBomb = null;
 	int ticksLB = 0; //Living Bomb
@@ -893,6 +907,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static int phantomKeyID = 3170;
     @MLProp public static int altarBlueprintID = 3171;
     
+    @MLProp public static boolean phantomChestsChunkLoading = true;
     @MLProp public static int magicExhaustionPotionID = 27;
     @MLProp public static boolean canReforgeArmor = true;
     @MLProp public static boolean creativeSpawnersEnabled = true;
@@ -915,13 +930,13 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     }
     
 
-    // Will be extended in the future.
-    private class ForgeHooks implements IBonemealHandler, IDestroyToolHandler{
+    private class ForgeHooks implements IBonemealHandler, IDestroyToolHandler, ISoundHandler{
     	
     	private ForgeHooks(){
         	MinecraftForgeClient.preloadTexture("/vazkii/ebonmod/sprites.png");
         	MinecraftForge.registerBonemealHandler(this);
         	MinecraftForge.registerDestroyToolHandler(this);
+        	MinecraftForgeClient.registerSoundHandler(this);
 			}
     	
     	public boolean onUseBonemeal(World world, int bid, int i, int j, int k) {
@@ -936,7 +951,50 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 			if(orig.itemID == necroTome.shiftedIndex)
 				player.addChatMessage("How in the world did you manage to break that? You should tell Vazkii about it...");
 		}
-    	
+
+		public void onSetupAudio(SoundManager soundManager) {
+		}
+
+		public void onLoadSoundSettings(SoundManager soundManager) {
+			File file = ModLoader.getMinecraftInstance().getMinecraftDir();
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/absorb.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/absorb.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/clearExhaustion.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/clearExhaustion.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/fail.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/fail.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/pcClose.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/pcClose.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/pcOpen.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/pcOpen.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/retrieval.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/retrieval.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/smite.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/smite.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/spell.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/spell.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/spNormal.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/spNormal.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/spRare.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/spRare.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/tome.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/tome.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/tool.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/tool.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/transmute.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/transmute.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/tsDeath.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/tsDeath.ogg"));
+		}
+
+		public SoundPoolEntry onPlayBackgroundMusic(SoundManager soundManager,
+				SoundPoolEntry entry) {
+			return entry;
+		}
+
+		public SoundPoolEntry onPlayStreaming(SoundManager soundManager,
+				SoundPoolEntry entry, String soundName, float x, float y,
+				float z) {
+			return entry;
+		}
+
+		public SoundPoolEntry onPlaySound(SoundManager soundManager,
+				SoundPoolEntry entry, String soundName, float x, float y,
+				float z, float volume, float pitch) {
+			return entry;
+		}
+
+		public SoundPoolEntry onPlaySoundEffect(SoundManager soundManager,
+				SoundPoolEntry entry, String soundName, float volume,
+				float pitch) {
+			return entry;
+		}
     }
 
 

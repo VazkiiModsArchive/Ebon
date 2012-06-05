@@ -47,11 +47,11 @@ public class EntityEbonGhost extends EntityMob
 
     protected String getDeathSound()
     {
-        return "portal.portal";
+        return "vazkii.ebonmod.tsDeath";
     }
     
     protected float getSoundVolume() {
-        return 0.3F;
+        return 1.0F;
      }
 
     public ItemStack getHeldItem()

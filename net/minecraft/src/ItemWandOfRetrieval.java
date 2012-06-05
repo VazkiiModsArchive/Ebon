@@ -29,7 +29,7 @@ public class ItemWandOfRetrieval extends Ebon3DItems {
         		world.setBlockWithNotify(i, j, k, 0);
         		world.removeBlockTileEntity(i, j, k);
         		ItemEbonStaff.doParticles(world, i, j, k);
-        		entityplayer.worldObj.playSoundEffect(playerX, playerY, playerZ, "mob.endermen.portal", 1.0F, 1.0F);
+        		entityplayer.worldObj.playSoundEffect(playerX, playerY, playerZ, "vazkii.ebonmod.retrieval", 1.0F, 1.0F);
         		
         		if(ModLoader.isModLoaded("mod_NotEnoughItems")){
             		if(!entityplayer.inventory.addItemStackToInventory(new ItemStack(Block.mobSpawner, 1, entityID)))
@@ -44,7 +44,7 @@ public class ItemWandOfRetrieval extends Ebon3DItems {
         		EbonAPI.addMagicalExhaustionOnPlayerFor(120);
         		return true;
         	}
-        }
+        } entityplayer.worldObj.playSoundEffect(playerX, playerY, playerZ, "vazkii.ebonmod.fail", 1.0F, 1.0F);
 
         return false;
     }

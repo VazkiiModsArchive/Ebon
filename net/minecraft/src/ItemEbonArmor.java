@@ -12,7 +12,7 @@ public class ItemEbonArmor extends ItemArmor implements ITextureProvider, ISpeci
 	private String[] armorEffectSuffixes = new String[]{
 			"", "Nature", "Respiration", "Frost", "Velocity",
 			"Obsidian Skin", "Revitalization", "Regeneration", "Leaping"
-			//All Souls are handled in mod_Ebon.class (OnTickInGame())
+			//All Souls are handled in mod_Ebon.class (onTickInGame())
 	};
 	
 	EnumArmorMaterial mat;
@@ -62,8 +62,10 @@ public class ItemEbonArmor extends ItemArmor implements ITextureProvider, ISpeci
 	public void damageArmor(EntityLiving entity, ItemStack stack,
 			DamageSource source, int damage, int slot) {
 		if(source.getEntity() instanceof EntityLiving && ((EntityLiving)source.getEntity()).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD){
-			if(new Random().nextInt(100) >= 90)
-			entity.heal(damage/4);
+			if(new Random().nextInt(100) >= 90){
+				entity.heal(damage + damage/4);
+				((EntityPlayer)entity).addChatMessage("Drain: " + (damage+damage/4));
+			}
 		}
 
 	}

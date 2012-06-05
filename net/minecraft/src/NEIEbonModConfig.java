@@ -12,6 +12,8 @@ public class NEIEbonModConfig implements IConfigureNEI {
 		API.setMaxDamageException(mod_Ebon.ebonstaffc.shiftedIndex, 0);
 		API.setMaxDamageException(mod_Ebon.soulstaffc.shiftedIndex, 0);
 		API.setMaxDamageException(mod_Ebon.soulorb.shiftedIndex, 0);
+		API.setMaxDamageException(mod_Ebon.ebonArmor_Hood.shiftedIndex, 4);
+		API.setMaxDamageException(mod_Ebon.ebonArmor_RobeTop.shiftedIndex, 4);
 		API.hideItem(mod_Ebon.mobSpawnerItem.shiftedIndex);
 		
 		MultiItemRange r = new MultiItemRange();

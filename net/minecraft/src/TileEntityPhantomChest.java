@@ -11,12 +11,15 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
     public float prevLidAngle;
     private int ticksSinceSync;
     public boolean isChestOpen;
+    private boolean locked;
     
     private int ticksUntilDespawn;
     private int chestRank;
+    
+	public boolean hasDoneBadThing = false;
 	
     public void initializeEntity(int ticks, int rank){
-    	
+    	locked = true;
     	ticksUntilDespawn = ticks;
     	chestRank = rank;
     	if(chestRank == 4) return;
@@ -197,6 +200,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
         }
         chestRank = par1NBTTagCompound.getInteger("Rank");
         ticksUntilDespawn = par1NBTTagCompound.getInteger("ticksRemaining");
+        locked = par1NBTTagCompound.getBoolean("locked");
     }
 	
     public void writeToNBT(NBTTagCompound par1NBTTagCompound)
@@ -217,6 +221,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
 
         par1NBTTagCompound.setInteger("Rank", chestRank);
         par1NBTTagCompound.setInteger("ticksRemaining", ticksUntilDespawn);
+        par1NBTTagCompound.setBoolean("locked", locked);
         par1NBTTagCompound.setTag("Items", var2);
     }
 	
@@ -224,6 +229,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
     {
         super.updateEntity();
         
+        if(locked)
         if(--ticksUntilDespawn <= 0){
              worldObj.setBlockWithNotify(xCoord, yCoord, zCoord, 0);
              worldObj.removeBlockTileEntity( xCoord,  yCoord,  zCoord);
@@ -236,7 +242,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
              worldObj.spawnParticle("explode", f, f2, f3, 0.0D, 0.0D, 0.0D);
             }
              worldObj.playSoundEffect( xCoord,  yCoord, zCoord, "mob.endermen.portal", 1.0F, 1.0F);
-        }
+        };
         
         this.prevLidAngle = this.lidAngle;
         float var1 = 0.1F;
@@ -247,7 +253,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
             double var2 = (double)this.xCoord + 0.5D;
             var4 = (double)this.zCoord + 0.5D;
 
-            this.worldObj.playSoundEffect(var2, (double)this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+            this.worldObj.playSoundEffect(var2, (double)this.yCoord + 0.5D, var4, "vazkii.ebonmod.pcClose", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
         }
 
         if (this.isChestOpen && this.lidAngle > 0.0F || this.isChestOpen && this.lidAngle < 1.0F)
@@ -275,7 +281,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
                 var4 = (double)this.xCoord + 0.5D;
                 double var6 = (double)this.zCoord + 0.5D;
 
-                this.worldObj.playSoundEffect(var4, (double)this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+                this.worldObj.playSoundEffect(var4, (double)this.yCoord + 0.5D, var6, "vazkii.ebonmod.pcClose", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
             }
 
             if (this.lidAngle < 0.0F)
@@ -291,6 +297,23 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory {
     
     public int getTicksUntilDespawn(){
     	return ticksUntilDespawn;
+    }
+    
+    public boolean isLocked(){
+    	return locked;
+    }
+    
+    public void unlock(){
+    	locked = false;
+    	worldObj.playSoundEffect(xCoord, yCoord, zCoord, "vazkii.ebonmod.pcOpen", 1.0F, 1.0F);
+    }
+    
+    public boolean getBadThing(){
+    	return hasDoneBadThing;
+    }
+    
+    public void setDoneBadThing(){
+    	hasDoneBadThing = true;
     }
 
 }

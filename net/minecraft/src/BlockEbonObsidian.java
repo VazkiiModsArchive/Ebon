@@ -4,6 +4,7 @@
 
 package net.minecraft.src;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.src.forge.ITextureProvider;
