@@ -23,9 +23,9 @@ import net.minecraft.client.Minecraft;
 
 public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 {
-
-    public mod_Ebon()
-    {  	
+	
+	public void load(){
+    	
     	new ForgeHooks();
     	
     	UMCore.addMod(this);
@@ -410,7 +410,9 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         	"PSS", "BIS", "BBP", Character.valueOf('P'), bloodPowder, Character.valueOf('S'), Item.silk, Character.valueOf('B'), Item.expBottle, Character.valueOf('I'), ebonglow
         });
         if(ModLoader.isModLoaded("mod_NotEnoughItems")){
-
+            ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
+            	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(Block.mobSpawner, 1, -1)
+            });
         }else{
             ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
             	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(mobSpawnerItem, 1, -1)
@@ -546,6 +548,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addAchievementDesc(getblade, "First Blood", "Make an Ebon Gem.");
         ModLoader.addAchievementDesc(getblock, "Killing Floor", "Make an Ebon Block.");
     }
+
 
     private void startArmorReforgeRecipes(){
     	for(int i=4;i>0;i--){
@@ -826,10 +829,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public String getPriorities()
     {
     	return "ater:mod_NotEnoughItems";
-    }
-    
-    public void load(){
-    	//BaseMod abstract method.
     }
 
     private static Minecraft mc = ModLoader.getMinecraftInstance();
