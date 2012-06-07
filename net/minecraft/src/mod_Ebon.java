@@ -2,11 +2,14 @@
 package net.minecraft.src;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
 import java.util.List;
 import java.util.Iterator;
 
+import net.minecraft.src.forge.EnumHelperClient;
 import net.minecraft.src.forge.IBonemealHandler;
 import net.minecraft.src.forge.IDestroyToolHandler;
 import net.minecraft.src.forge.ISoundHandler;
@@ -47,6 +50,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.registerBlock(darkobsidian);
         ModLoader.registerBlock(soulgemblock);
         ModLoader.registerBlock(phantomChest);
+        ModLoader.registerBlock(soulVase);
         
         ModLoader.registerTileEntity(TileEntityPhantomChest.class, "TilePhantomChest", new RenderPhantomChest());
         phantomChestRenderID = ModLoader.getUniqueBlockModelID(this, true);
@@ -96,7 +100,12 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         mobSpawnerItem = (new ItemMobSpawnerItem(mobSpawnerItemID)).setIconCoord(1, 4).setItemName("mobSpawnerItem");
         phantomKey = (new ItemEbonMod(phantomKeyID)).setIconCoord(8, 7).setMaxStackSize(8).setItemName("phantomKey");
         altarBlueprint = (new ItemEbonAltarBlueprint(altarBlueprintID)).setIconCoord(12, 3).setItemName("altarBlueprint");
-
+        plusiumCharm = (new ItemPlusiumCharm(plusiumCharmID)).setIconCoord(9, 7).setItemName("plusiumCharm");
+        miniumCharm = (new ItemMiniumCharm(miniumCharmID)).setIconCoord(10, 7).setItemName("miniumCharm");
+        soulVaseItem = (new ItemSoulVaseItem(soulVaseItemID, soulVase)).setIconCoord(13, 7).setItemName("soulVaseItem");
+        gemOfDespair = (new ItemEbonMod(gemOfDespairID)).setIconCoord(11, 7).setItemName("gemOfDespair");
+        lockWand = (new ItemWandOfImprisonment(lockWandID)).setIconCoord(12, 7).setItemName("lockWand");
+        
         mortarPestle.setContainerItem(mortarPestle);
         
         ModLoader.addName(ebonpick, "Ebon Pick");
@@ -152,6 +161,12 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addName(phantomChest, "Phantom Chest");
         ModLoader.addName(phantomKey, "Phantom Key");
         ModLoader.addName(altarBlueprint, "Ancient Scroll");
+        ModLoader.addName(plusiumCharm, "Plusium Charm");
+        ModLoader.addName(miniumCharm, "Minium Charm");
+        ModLoader.addName(soulVase, "Vase of Souls");
+        ModLoader.addName(soulVaseItem, "Vase of Souls");
+        ModLoader.addName(gemOfDespair, "Gem of Despair");
+        ModLoader.addName(lockWand, "Wand of Imprisonment");
         
 		ModLoader.addLocalization("enchantment.level.11", "XI");
 		ModLoader.addLocalization("enchantment.level.12", "XII");
@@ -388,6 +403,22 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addRecipe(new ItemStack(phantomKey, 1), new Object[] {
             " I", "G ",  Character.valueOf('I'), Item.ingotIron, Character.valueOf('G'), Item.goldNugget
         });
+        ModLoader.addRecipe(new ItemStack(miniumCharm, 1), new Object[]{
+        	"PSS", "BIS", "BBP", Character.valueOf('P'), bloodPowder, Character.valueOf('S'), Item.silk, Character.valueOf('B'), Item.expBottle, Character.valueOf('I'), darkobsidian
+        });
+        ModLoader.addRecipe(new ItemStack(plusiumCharm, 1), new Object[]{
+        	"PSS", "BIS", "BBP", Character.valueOf('P'), bloodPowder, Character.valueOf('S'), Item.silk, Character.valueOf('B'), Item.expBottle, Character.valueOf('I'), ebonglow
+        });
+        if(ModLoader.isModLoaded("mod_NotEnoughItems")){
+
+        }else{
+            ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
+            	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(mobSpawnerItem, 1, -1)
+            });
+        }
+        ModLoader.addRecipe(new ItemStack(soulVaseItem, 2), new Object[]{
+        	"CSC", "CGC", "CDC", Character.valueOf('C'), Block.blockClay, Character.valueOf('S'), soulStone, Character.valueOf('G'), bloodPowder, Character.valueOf('D'), Item.cauldron
+        });
         
         if(!canReforgeArmor) break recipes;
         
@@ -407,6 +438,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	EbonAPI.addSimpleEbonStaffEvent(Block.brick.blockID, Block.netherBrick.blockID);
     	EbonAPI.addEbonStaffEvent(bloodCrops.blockID, new EbonStaffEventBloodCrops());
     	EbonAPI.addEbonStaffEvent(Block.bookShelf.blockID, new EbonStaffEventAltarBlueprint());
+    	EbonAPI.addEbonStaffEvent(Block.stoneBrick.blockID, new EbonStaffEventStoneBricks());
     	
     	//Staff of Souls Events:
     	EbonAPI.addSimpleStaffOfSoulsEvent("Chicken", "Silverfish");
@@ -495,11 +527,18 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Item.monsterPlacer, 1, 98), 3); loot.setMaxQtd(4); loot.setMinQtd(1); loot.setChance(15); EbonAPI.addPhantomLoot(loot);
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Item.monsterPlacer, 1, 95), 3); loot.setMaxQtd(4); loot.setMinQtd(1); loot.setChance(15); EbonAPI.addPhantomLoot(loot);
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Item.record11), 3); loot.setMaxQtd(1); loot.setChance(10); EbonAPI.addPhantomLoot(loot);
-    	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Item.expBottle), 3); loot.setMaxQtd(4); loot.setMinQtd(1); loot.setChance(90); EbonAPI.addPhantomLoot(loot);
+    	loot = new EbonAPI_PhantomChestLoot(new ItemStack(gemOfDespair), 3); loot.setMaxQtd(1); loot.setChance(5); EbonAPI.addPhantomLoot(loot);
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Block.bedrock), 3); loot.setMaxQtd(12); loot.setMinQtd(4); loot.setChance(50); EbonAPI.addPhantomLoot(loot);
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Block.sponge), 3); loot.setMaxQtd(12); loot.setMinQtd(4); EbonAPI.addPhantomLoot(loot);
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Block.fire), 3); loot.setMaxQtd(8); loot.setMinQtd(4); EbonAPI.addPhantomLoot(loot);
 
+    	//Blacklistd Spawners
+    	EbonAPI.blacklistSpawner("VillagerGolem");
+    	EbonAPI.blacklistSpawner("EbonGhost");
+    	EbonAPI.blacklistSpawner("EbonGhostFRG");
+    	EbonAPI.blacklistSpawner("Slime");
+    	EbonAPI.blacklistSpawner("SnowMan");
+    	EbonAPI.blacklistSpawner("MushroomCow");
     	
     	getblade = (new Achievement(91, "getblade", 8, 1, ebongem, AchievementList.killEnemy)).registerAchievement();
         getblock = (new Achievement(92, "getblock", 8, 3, ebonblock, getblade)).registerAchievement();
@@ -582,6 +621,17 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     		mc.thePlayer.fallDistance = 0.0F;
     		hasJumpTicked = false;
     	}
+	
+    	//Marked Entity Clearance handler
+    	for(Entity e : markedEntities){
+    		if(e.isDead)
+    			markedEntitiesForRemoval.add(e);
+    	}
+    	for(Entity e : markedEntitiesForRemoval){
+    		if(markedEntities.contains(e))
+    			markedEntities.remove(e);
+    	}
+    	markedEntitiesForRemoval.clear();
     	
     	//Exhaustion Clearance handler
     	exNow = minecraft.thePlayer.activePotionsMap.containsKey(new PotionEffect(mod_Ebon.magicExhaustion.id, 1, 0).getPotionID());
@@ -679,16 +729,24 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	/*****/
     		
     	}
-
     	}
         
-    	//Multiple Scepters
+    	//Multiple Scepters or Charms
     	if(hasMultipleScepters(minecraft.thePlayer)){
     		if(ticksMS == 20 && mc.theWorld.worldInfo.getGameType() != 1){
+    			mc.theWorld.playSoundAtEntity(mc.thePlayer, "vazkii.ebonmod.fail", 1.0F, 1.0F);
     			mc.thePlayer.attackEntityFrom(DamageSource.magic, 2);
     			ticksMS = 0;
     		}
     		ticksMS++;
+    	}
+    	if(minecraft.thePlayer.inventory.hasItemStack(new ItemStack(plusiumCharm, 1)) && minecraft.thePlayer.inventory.hasItemStack(new ItemStack(miniumCharm, 1))){
+    		if(ticksMC == 20 && mc.theWorld.worldInfo.getGameType() != 1){
+    			mc.theWorld.playSoundAtEntity(mc.thePlayer, "vazkii.ebonmod.fail", 1.0F, 1.0F);
+    			mc.thePlayer.attackEntityFrom(DamageSource.magic, 2);
+    			ticksMC = 0;
+    		}
+    		ticksMC++;
     	}
     	
     	//Living Bomb
@@ -733,6 +791,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
             	itemList.add(new ItemStack(mod_Ebon.ebonglow, 1));
             	itemList.add(new ItemStack(mod_Ebon.soulgemblock, 1));
             	itemList.add(new ItemStack(mod_Ebon.phantomChest, 1));
+            	itemList.add(new ItemStack(mod_Ebon.soulVase, 1));
             	for(int i1=4;i1>0;i1--){
             		itemList.add(new ItemStack(mod_Ebon.ebonArmor_Hood, 1, i1));
             		itemList.add(new ItemStack(mod_Ebon.ebonArmor_RobeTop, 1, i1));
@@ -764,6 +823,11 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         return "by Vazkii. Version [3.1.2] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
     
+    public String getPriorities()
+    {
+    	return "ater:mod_NotEnoughItems";
+    }
+    
     public void load(){
     	//BaseMod abstract method.
     }
@@ -774,6 +838,9 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     		50, 51, 52, 54, 53, 55, 56, 57, 58, 59, 60, 61, 62, 90, 91, 92, 93, 94, 95, 96, 98, 120, 97, 99
     };
     
+	protected static List<Entity> markedEntities = new LinkedList<Entity>();
+	private static List<Entity> markedEntitiesForRemoval = new LinkedList<Entity>();
+    
     private static boolean exLast;
     private static boolean exNow;
     
@@ -782,6 +849,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     int ticksMS = 0; //Multiple Scepters
 	int ticksFT = 0; //Food Tick
 	int ticksRT = 0; //Regeneration Tick
+	int ticksMC = 0; //Multiple Charms
 	
 	boolean hasAirTicked = false;
 	boolean hasJumpTicked = false;
@@ -797,6 +865,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public static final Block soulgemblock;
     public static final Block bloodCrops;
     public static final Block phantomChest;
+    public static final Block soulVase;
     
     public static int phantomChestRenderID;
 
@@ -845,6 +914,11 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public static Item mobSpawnerItem;
     public static Item phantomKey;
     public static Item altarBlueprint;
+    public static Item plusiumCharm;
+    public static Item miniumCharm;
+    public static Item soulVaseItem;
+    public static Item gemOfDespair;
+    public static Item lockWand;
     
     public static final Potion magicExhaustion;
     
@@ -858,6 +932,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static int ebonglowID = 190;
     @MLProp public static int darkobsidianID = 191;
     @MLProp public static int phantomChestID = 195;
+    @MLProp public static int soulVaseID = 196;
     
     @MLProp public static int corpsedustID = 3128;
     @MLProp public static int deaddustID = 3129;
@@ -906,9 +981,15 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static int mobSpawnerItemID = 3169;
     @MLProp public static int phantomKeyID = 3170;
     @MLProp public static int altarBlueprintID = 3171;
+    @MLProp public static int plusiumCharmID = 3172;
+    @MLProp public static int miniumCharmID = 3173;
+    @MLProp public static int soulVaseItemID = 3174;
+    @MLProp public static int gemOfDespairID = 3175;
+    @MLProp public static int lockWandID = 3176;
+    
+    @MLProp public static int magicExhaustionPotionID = 27;
     
     @MLProp public static boolean phantomChestsChunkLoading = true;
-    @MLProp public static int magicExhaustionPotionID = 27;
     @MLProp public static boolean canReforgeArmor = true;
     @MLProp public static boolean creativeSpawnersEnabled = true;
     @MLProp public static int phantomChestRarity = 2;
@@ -925,6 +1006,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         soulgemblock = (new BlockOreStorageEbon(soulgemblockID, 2)).setHardness(2.0F).setResistance(10F).setLightValue(0.8F).setStepSound(Block.soundMetalFootstep).setBlockName("soulgemblock");
         bloodCrops = (new BlockBloodLeaf(bloodCropsID, 248)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("bloodCrops").disableStats().setRequiresSelfNotify();
         phantomChest = (new BlockPhantomChest(phantomChestID, Material.rock)).setLightValue(0.6F).setBlockUnbreakable().setBlockName("phantomChest");
+        soulVase = (new BlockVaseOfSouls(soulVaseID)).setHardness(0.9F).setStepSound(Block.soundGravelFootstep).setBlockName("soulVase");
         
         magicExhaustion  = new Potion(magicExhaustionPotionID, false, 0x65007b).setPotionName("Magical Exhaustion").setIconIndex(0, 1);
     }
@@ -971,6 +1053,8 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/tool.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/tool.ogg"));
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/transmute.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/transmute.ogg"));
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/tsDeath.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/tsDeath.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/vase.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/vase.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/minium.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/minium.ogg"));
 		}
 
 		public SoundPoolEntry onPlayBackgroundMusic(SoundManager soundManager,

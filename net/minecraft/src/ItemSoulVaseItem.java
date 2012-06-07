@@ -1,11 +1,12 @@
 package net.minecraft.src;
+
 import net.minecraft.src.forge.ITextureProvider;
 
-public class BlockOreStorageEbon extends BlockOreStorage implements ITextureProvider
+public class ItemSoulVaseItem extends ItemReed implements ITextureProvider
 {
-    public BlockOreStorageEbon(int i, int j)
+    public ItemSoulVaseItem(int par1, Block par2Block)
     {
-        super(i, j);
+        super(par1, par2Block);
     }
 
     public String getTextureFile()

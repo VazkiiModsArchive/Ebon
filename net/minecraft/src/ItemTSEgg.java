@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class ItemTSEgg extends Item
 {
-	String spawn;
-	int color2;
+    String spawn;
+    int color2;
     public ItemTSEgg(int i, String s, int c)
     {
         super(i);
@@ -17,9 +17,12 @@ public class ItemTSEgg extends Item
 
     public int getColorFromDamage(int i, int j)
     {
-            if (j == 0)
+        if (j == 0)
+        {
             return 0x191919;
-            return color2;
+        }
+
+        return color2;
     }
 
     public boolean func_46058_c()
@@ -45,7 +48,7 @@ public class ItemTSEgg extends Item
         j += Facing.offsetsYForSide[l];
         k += Facing.offsetsZForSide[l];
         EntityLiving entityliving = (EntityLiving)EntityList.createEntityByName(spawn, world);
-        entityliving.setLocationAndAngles(i, j+1, k, world.rand.nextFloat() * 360F, 0.0F);
+        entityliving.setLocationAndAngles(i, j + 1, k, world.rand.nextFloat() * 360F, 0.0F);
         world.spawnEntityInWorld(entityliving);
         return true;
     }

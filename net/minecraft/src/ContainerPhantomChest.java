@@ -1,17 +1,20 @@
 package net.minecraft.src;
 
-public class ContainerPhantomChest extends Container {
+public class ContainerPhantomChest extends Container
+{
     private int numRows;
     private IInventory inv;
-	
-	public ContainerPhantomChest(IInventory par1IInventory, IInventory par2IInventory) {
+
+    public ContainerPhantomChest(IInventory par1IInventory, IInventory par2IInventory)
+    {
         this.numRows = par2IInventory.getSizeInventory() / 9;
         inv = par2IInventory;
         par2IInventory.openChest();
         int var3 = (this.numRows - 4) * 18;
-		int var4;
+        int var4;
         int var5;
-		for (var4 = 0; var4 < this.numRows; ++var4)
+
+        for (var4 = 0; var4 < this.numRows; ++var4)
         {
             for (var5 = 0; var5 < 9; ++var5)
             {
@@ -50,7 +53,10 @@ public class ContainerPhantomChest extends Container {
                     return null;
                 }
             }
-            else return null;
+            else
+            {
+                return null;
+            }
 
             if (var4.stackSize == 0)
             {
@@ -64,9 +70,9 @@ public class ContainerPhantomChest extends Container {
 
         return var2;
     }
-	
-	public boolean canInteractWith(EntityPlayer var1) {
-		return inv.isUseableByPlayer(var1);
-	}
 
+    public boolean canInteractWith(EntityPlayer var1)
+    {
+        return inv.isUseableByPlayer(var1);
+    }
 }

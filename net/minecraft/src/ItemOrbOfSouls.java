@@ -1,6 +1,6 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst 
+// Decompiler options: packimports(3) braces deadcode fieldsfirst
 
 package net.minecraft.src;
 
@@ -9,13 +9,12 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 
 // Referenced classes of package net.minecraft.src:
-//            Item, ModLoader, EntityLiving, EntityEbonGhost, 
-//            ItemStack, EntityPlayer, World, InventoryPlayer, 
+//            Item, ModLoader, EntityLiving, EntityEbonGhost,
+//            ItemStack, EntityPlayer, World, InventoryPlayer,
 //            mod_Ebon
 
 public class ItemOrbOfSouls extends ItemEbonMod
 {
-
     protected boolean canRepair = true;
     private int intToDamage;
     private int thisDmg;
@@ -37,16 +36,19 @@ public class ItemOrbOfSouls extends ItemEbonMod
         double d1 = entityliving.posY;
         double d2 = entityliving.posZ;
         EntityPlayerSP entityplayersp = mc.thePlayer;
-        if(entityliving instanceof EntityEbonGhost && entityliving.health == 20000 && !EbonAPI.doesPlayerHaveMagicExhaustion())
+
+        if (entityliving instanceof EntityEbonGhost && entityliving.health == 20000 && !EbonAPI.doesPlayerHaveMagicExhaustion())
         {
-            if(!itemstack.isItemDamaged())
+            if (!itemstack.isItemDamaged())
             {
                 itemstack.damageItem(intToDamage, entityliving);
             }
-            if(itemstack.isItemDamaged())
+
+            if (itemstack.isItemDamaged())
             {
                 Random random = new Random();
-                for(int i = 0; i < 1000; i++)
+
+                for (int i = 0; i < 1000; i++)
                 {
                     entityliving.worldObj.spawnParticle("portal", entityliving.posX + (random.nextDouble() - 0.5D) * (double)entityliving.width, (entityliving.posY + random.nextDouble() * (double)entityliving.height) - 0.25D, entityliving.posZ + (random.nextDouble() - 0.5D) * (double)entityliving.width, (random.nextDouble() - 0.5D) * 2D, -random.nextDouble(), (random.nextDouble() - 0.5D) * 2D);
                 }
@@ -56,34 +58,46 @@ public class ItemOrbOfSouls extends ItemEbonMod
                 thisDmg = itemstack.getItemDamage();
                 thisDmg--;
                 itemstack.setItemDamage(thisDmg);
-                if(!itemstack.isItemDamaged())
+
+                if (!itemstack.isItemDamaged())
                 {
                     itemstack.damageItem(intToDamage + 1, entityliving);
-                    ItemStack itemstack1 = ((EntityPlayer) (entityplayersp)).inventory.getCurrentItem();
+                    ItemStack itemstack1 = ((EntityPlayer)(entityplayersp)).inventory.getCurrentItem();
                     itemstack1 = new ItemStack(mod_Ebon.soulorbc);
-                    if(!((EntityPlayer) (entityplayersp)).inventory.addItemStackToInventory(itemstack1))
-                    	entityliving.dropItemWithOffset(mod_Ebon.soulorb.shiftedIndex, 1, 0.0F);
+
+                    if (!((EntityPlayer)(entityplayersp)).inventory.addItemStackToInventory(itemstack1))
+                    {
+                        entityliving.dropItemWithOffset(mod_Ebon.soulorb.shiftedIndex, 1, 0.0F);
+                    }
+
                     entityplayersp.addChatMessage("The Orb seems to be fully charged.");
                 }
-            } else
+            }
+            else
             {
                 entityliving.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.fail", 1.0F, 1.0F);
             }
-        } else
+        }
+        else
         {
             entityliving.worldObj.playSoundEffect(d, d1, d2, "vazkii.ebonmod.fail", 1.0F, 1.0F);
         }
-        if(!(entityliving instanceof EntityEbonGhost))
+
+        if (!(entityliving instanceof EntityEbonGhost))
         {
             entityplayersp.addChatMessage("The Orb seems to reject this soul.");
         }
     }
-    
+
     public void addInformation(ItemStack itemstack, List list)
     {
-    	if(itemstack.getItemDamageForDisplay() == 0)
-        list.add("No Souls");
-    	else
-    	list.add(new StringBuilder().append("Souls: ").append(20 - itemstack.getItemDamageForDisplay()).append("/20").toString());
+        if (itemstack.getItemDamageForDisplay() == 0)
+        {
+            list.add("No Souls");
+        }
+        else
+        {
+            list.add(new StringBuilder().append("Souls: ").append(20 - itemstack.getItemDamageForDisplay()).append("/20").toString());
+        }
     }
 }

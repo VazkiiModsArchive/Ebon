@@ -7,7 +7,6 @@ import net.minecraft.src.forge.ITextureProvider;
 
 public class ItemEbonBow extends ItemBow implements ITextureProvider
 {
-
     public ItemEbonBow(int i)
     {
         super(i);
@@ -20,7 +19,7 @@ public class ItemEbonBow extends ItemBow implements ITextureProvider
         {
             return;
         }
-        
+
         boolean var5 = par3EntityPlayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, par1ItemStack) > 0;
 
         if (var5 || par3EntityPlayer.inventory.hasItem(Item.arrow.shiftedIndex))
@@ -83,14 +82,14 @@ public class ItemEbonBow extends ItemBow implements ITextureProvider
             }
         }
     }
-    
-	public String getTextureFile() {
-		return "/vazkii/ebonmod/sprites.png";
-	}
-    
+
+    public String getTextureFile()
+    {
+        return "/vazkii/ebonmod/sprites.png";
+    }
+
     public int getItemEnchantability()
     {
         return 2;
     }
-    
 }

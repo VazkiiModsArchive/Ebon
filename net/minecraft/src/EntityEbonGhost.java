@@ -1,6 +1,6 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
+// Decompiler options: packimports(3) braces deadcode
 
 package net.minecraft.src;
 import java.util.Iterator;
@@ -9,32 +9,35 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 
 // Referenced classes of package net.minecraft.src:
-//            EntityMob, mod_Ebon, Item, ItemStack, 
+//            EntityMob, mod_Ebon, Item, ItemStack,
 //            World
 
 public class EntityEbonGhost extends EntityMob
 {
+    Random part = new Random();
 
-	Random part = new Random();
-
-	public EntityEbonGhost(World world)
+    public EntityEbonGhost(World world)
     {
         super(world);
         Random r = new Random();
         texture = "/vazkii/ebonmod/ebonspirit.png";
         moveSpeed = 0.9F;
-        while(moveSpeed < 0.2F || moveSpeed > 0.6F){
-        moveSpeed = r.nextFloat();}
+
+        while (moveSpeed < 0.2F || moveSpeed > 0.6F)
+        {
+            moveSpeed = r.nextFloat();
+        }
+
         attackStrength = 16;
         health = 20000; //Only kill with ebon sword
         isImmuneToFire = true;
     }
-   
+
     public int getMaxHealth()
     {
         return 20000;
     }
-    
+
     protected String getLivingSound()
     {
         return null;
@@ -49,10 +52,11 @@ public class EntityEbonGhost extends EntityMob
     {
         return "vazkii.ebonmod.tsDeath";
     }
-    
-    protected float getSoundVolume() {
+
+    protected float getSoundVolume()
+    {
         return 1.0F;
-     }
+    }
 
     public ItemStack getHeldItem()
     {
@@ -66,44 +70,53 @@ public class EntityEbonGhost extends EntityMob
     protected void dropFewItems(boolean flag, int i)
     {
         int z = rand.nextInt(3);
-        for(int k = 0; k < z; k++)
+
+        for (int k = 0; k < z; k++)
         {
             dropItem(mod_Ebon.soul.shiftedIndex, 1);
         }
-
     }
-    
+
     public boolean attackEntityFrom(DamageSource damagesource, int i)
     {
         Entity entity = damagesource.getEntity();
 
-        if(super.attackEntityFrom(damagesource, i) && (entity instanceof EntityPlayer))
+        if (super.attackEntityFrom(damagesource, i) && (entity instanceof EntityPlayer))
         {
-        	EntityPlayer ep = mc.thePlayer;
-        	 ItemStack itemstack = ep.inventory.getCurrentItem();
-             if(itemstack == null || itemstack.itemID != mod_Ebon.ebonsword.shiftedIndex)
-        	ep.addChatMessage("This weapon doesn't seem to be very effective, maybe I should attack it with something else...");
+            EntityPlayer ep = mc.thePlayer;
+            ItemStack itemstack = ep.inventory.getCurrentItem();
+
+            if (itemstack == null || itemstack.itemID != mod_Ebon.ebonsword.shiftedIndex)
+            {
+                ep.addChatMessage("This weapon doesn't seem to be very effective, maybe I should attack it with something else...");
+            }
+
             return true;
-        } else
+        }
+        else
+        {
             return false;
+        }
     }
-    
+
     public void onLivingUpdate()
     {
         worldObj.spawnParticle("townaura", posX + (rand.nextDouble() - 0.5D) * (double)width, posY + rand.nextDouble() * (double)height, posZ + (rand.nextDouble() - 0.5D) * (double)width, 0.0D, 0.0D, 0.0D);
-        worldObj.spawnParticle("townaura", posX + (rand.nextDouble() - 0.5D) * (double)width, posY + rand.nextDouble()+0.5D * (double)height, posZ + (rand.nextDouble() - 0.5D) * (double)width, 0.0D, 0.0D, 0.0D);
+        worldObj.spawnParticle("townaura", posX + (rand.nextDouble() - 0.5D) * (double)width, posY + rand.nextDouble() + 0.5D * (double)height, posZ + (rand.nextDouble() - 0.5D) * (double)width, 0.0D, 0.0D, 0.0D);
         findPlayerToAttack();
         super.onLivingUpdate();
     }
-    
+
     protected Entity findPlayerToAttack()
     {
         EntityPlayer ep = mc.thePlayer;
         ItemStack itemstack = ep.getCurrentEquippedItem();
-        if(itemstack != null && itemstack.getItem() instanceof ItemEbonScepter)
+
+        if (itemstack != null && itemstack.getItem() instanceof ItemEbonScepter)
         {
-        	return null;
-        } else
+            return null;
+        }
+        else
         {
             double d = 16D;
             return worldObj.getClosestVulnerablePlayerToEntity(this, d);
@@ -118,7 +131,7 @@ public class EntityEbonGhost extends EntityMob
     private static final ItemStack defaultHeldItem;
     private Minecraft mc = ModLoader.getMinecraftInstance();
 
-    static 
+    static
     {
         defaultHeldItem = new ItemStack(mod_Ebon.ebonstaffu, 1);
     }
