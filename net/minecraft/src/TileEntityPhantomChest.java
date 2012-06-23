@@ -1,10 +1,13 @@
 package net.minecraft.src;
 
 import java.util.Random;
+import java.util.Set;
 
+import net.minecraft.src.forge.IChunkLoadHandler;
 import net.minecraft.src.forge.MinecraftForge;
+import net.minecraft.src.forge.MinecraftForgeClient;
 
-public class TileEntityPhantomChest extends TileEntity implements IInventory
+public class TileEntityPhantomChest extends TileEntity implements IInventory, IChunkLoadHandler
 {
     private ItemStack[] chestContents = new ItemStack[36];
     public float lidAngle;
@@ -20,6 +23,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory
 
     public void initializeEntity(int ticks, int rank)
     {
+    	MinecraftForge.registerChunkLoadHandler(this);
         locked = true;
         ticksUntilDespawn = ticks;
         chestRank = rank;
@@ -55,7 +59,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory
         {
             rank = 3;
         }
-        else if (rankRand > 59)
+        else if (rankRand > 49)
         {
             rank = 2;
         }
@@ -64,7 +68,7 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory
             rank = 1;
         }
 
-        initializeEntity(rand.nextInt(16) * 600, rank);
+        initializeEntity((rand.nextInt(15)+1) * 600, rank);
     }
 
     private boolean isSlotOccupied(int slot)
@@ -379,4 +383,16 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory
     {
         hasDoneBadThing = true;
     }
+
+	public void addActiveChunks(World world, Set<ChunkCoordIntPair> chunkList) {	
+	}
+
+	public boolean canUnloadChunk(Chunk chunk) {
+		Chunk pair = worldObj.getChunkFromBlockCoords(xCoord, yCoord);
+		return chunk != pair;
+	}
+
+	public boolean canUpdateEntity(Entity entity) {
+		return false;
+	}
 }

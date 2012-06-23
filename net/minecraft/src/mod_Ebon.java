@@ -23,7 +23,6 @@ import net.minecraft.client.Minecraft;
 
 public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 {
-	
 	public void load(){
     	
     	new ForgeHooks();
@@ -409,15 +408,12 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addRecipe(new ItemStack(plusiumCharm, 1), new Object[]{
         	"PSS", "BIS", "BBP", Character.valueOf('P'), bloodPowder, Character.valueOf('S'), Item.silk, Character.valueOf('B'), Item.expBottle, Character.valueOf('I'), ebonglow
         });
-        if(ModLoader.isModLoaded("mod_NotEnoughItems")){
-            ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
-            	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(Block.mobSpawner, 1, -1)
-            });
-        }else{
-            ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
-            	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(mobSpawnerItem, 1, -1)
-            });
-        }
+        ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
+            "  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(Block.mobSpawner, 1, -1)
+        });
+        ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
+        	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(mobSpawnerItem, 1, -1)
+       });
         ModLoader.addRecipe(new ItemStack(soulVaseItem, 2), new Object[]{
         	"CSC", "CGC", "CDC", Character.valueOf('C'), Block.blockClay, Character.valueOf('S'), soulStone, Character.valueOf('G'), bloodPowder, Character.valueOf('D'), Item.cauldron
         });
@@ -794,7 +790,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
             	itemList.add(new ItemStack(mod_Ebon.ebonglow, 1));
             	itemList.add(new ItemStack(mod_Ebon.soulgemblock, 1));
             	itemList.add(new ItemStack(mod_Ebon.phantomChest, 1));
-            	itemList.add(new ItemStack(mod_Ebon.soulVase, 1));
             	for(int i1=4;i1>0;i1--){
             		itemList.add(new ItemStack(mod_Ebon.ebonArmor_Hood, 1, i1));
             		itemList.add(new ItemStack(mod_Ebon.ebonArmor_RobeTop, 1, i1));
@@ -823,12 +818,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 
     public String getVersion()
     {
-        return "by Vazkii. Version [3.1.2] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
-    }
-    
-    public String getPriorities()
-    {
-    	return "ater:mod_NotEnoughItems";
+        return "by Vazkii. Version [3.2.1] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
 
     private static Minecraft mc = ModLoader.getMinecraftInstance();

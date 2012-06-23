@@ -6,7 +6,7 @@ import java.util.Set;
 import net.minecraft.src.forge.IChunkLoadHandler;
 import net.minecraft.src.forge.MinecraftForge;
 
-public class BlockPhantomChest extends BlockContainer implements IChunkLoadHandler
+public class BlockPhantomChest extends BlockContainer
 {
     Random rand = new Random();
 
@@ -14,7 +14,6 @@ public class BlockPhantomChest extends BlockContainer implements IChunkLoadHandl
     {
         super(par1, par2Material);
         setTickRandomly(true);
-        MinecraftForge.registerChunkLoadHandler(this);
     }
 
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving)
@@ -207,17 +206,4 @@ public class BlockPhantomChest extends BlockContainer implements IChunkLoadHandl
         t.worldObj.removeBlockTileEntity(x, y, z);
     }
 
-    public void addActiveChunks(World world, Set<ChunkCoordIntPair> chunkList)
-    {
-    }
-
-    public boolean canUnloadChunk(Chunk chunk)
-    {
-        return !mod_Ebon.phantomChestsChunkLoading;
-    }
-
-    public boolean canUpdateEntity(Entity entity)
-    {
-        return true;
-    }
 }
