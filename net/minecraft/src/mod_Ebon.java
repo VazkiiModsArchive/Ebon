@@ -40,19 +40,20 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
             BiomeGenBase.hell
         });
         ModLoader.addSpawn("PhantomChestSpawner", phantomChestRarity, 1, 1, EnumCreatureType.monster);
-        
-        ModLoader.registerBlock(ebonstone);
-        ModLoader.registerBlock(quicksand);
-        ModLoader.registerBlock(ebonblock);
-        ModLoader.registerBlock(ebonglow);
-        ModLoader.registerBlock(ebontorch);
-        ModLoader.registerBlock(darkobsidian);
-        ModLoader.registerBlock(soulgemblock);
-        ModLoader.registerBlock(phantomChest);
-        ModLoader.registerBlock(soulVase);
-        
+
         ModLoader.registerTileEntity(TileEntityPhantomChest.class, "TilePhantomChest", new RenderPhantomChest());
         phantomChestRenderID = ModLoader.getUniqueBlockModelID(this, true);
+        
+        quicksand = (new BlockQuicksand(quicksandID, 3)).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("quicksand");
+        ebonstone = (new BlockEbonStone(ebonstoneID, 5)).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundStoneFootstep).setBlockName("ebonstone");
+        ebonblock = (new BlockOreStorageEbon(ebonblockID, 1)).setHardness(2.0F).setResistance(10F).setLightValue(0.8F).setStepSound(Block.soundMetalFootstep).setBlockName("ebonblock");
+        ebontorch = (new BlockEbonTorch(ebontorchID, 6)).setHardness(0.0F).setLightValue(1.0F).setStepSound(Block.soundWoodFootstep).setBlockName("ebontorch").setRequiresSelfNotify();
+        ebonglow = (new BlockEbonGlowstone(ebonglowID, 0, Material.rock)).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setLightValue(1.0F).setBlockName("ebonglow");
+        darkobsidian = (new BlockEbonObsidian(darkobsidianID, 4)).setHardness(10F).setResistance(2000F).setLightValue(0.8F).setStepSound(Block.soundStoneFootstep).setBlockName("darkobsidian");
+        soulgemblock = (new BlockOreStorageEbon(soulgemblockID, 2)).setHardness(2.0F).setResistance(10F).setLightValue(0.8F).setStepSound(Block.soundMetalFootstep).setBlockName("soulgemblock");
+        bloodCrops = (new BlockBloodLeaf(bloodCropsID, 248)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("bloodCrops").disableStats().setRequiresSelfNotify();
+        phantomChest = (new BlockPhantomChest(phantomChestID, Material.rock)).setLightValue(0.6F).setBlockUnbreakable().setBlockName("phantomChest");
+        soulVase = (new BlockVaseOfSouls(soulVaseID)).setHardness(0.9F).setStepSound(Block.soundGravelFootstep).setBlockName("soulVase");
         
         soul = (new ItemEbonMod(soulID)).setIconCoord(13, 5).setItemName("soul");
         soulsub = (new ItemSoulPowder(soulsubID)).setIconCoord(14, 5).setItemName("soulsub");
@@ -104,8 +105,20 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         soulVaseItem = (new ItemSoulVaseItem(soulVaseItemID, soulVase)).setIconCoord(13, 7).setItemName("soulVaseItem");
         gemOfDespair = (new ItemEbonMod(gemOfDespairID)).setIconCoord(11, 7).setItemName("gemOfDespair");
         lockWand = (new ItemWandOfImprisonment(lockWandID)).setIconCoord(12, 7).setItemName("lockWand");
+
+        magicExhaustion  = new Potion(magicExhaustionPotionID, false, 0x65007b).setPotionName("Magical Exhaustion").setIconIndex(0, 1);
         
         mortarPestle.setContainerItem(mortarPestle);
+        
+        ModLoader.registerBlock(ebonstone);
+        ModLoader.registerBlock(quicksand);
+        ModLoader.registerBlock(ebonblock);
+        ModLoader.registerBlock(ebonglow);
+        ModLoader.registerBlock(ebontorch);
+        ModLoader.registerBlock(darkobsidian);
+        ModLoader.registerBlock(soulgemblock);
+        ModLoader.registerBlock(phantomChest);
+        ModLoader.registerBlock(soulVase);
         
         ModLoader.addName(ebonpick, "Ebon Pick");
         ModLoader.addName(ebonspade, "Ebon Spade");
@@ -162,7 +175,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addName(altarBlueprint, "Ancient Scroll");
         ModLoader.addName(plusiumCharm, "Plusium Charm");
         ModLoader.addName(miniumCharm, "Minium Charm");
-        ModLoader.addName(soulVase, "Vase of Souls");
+        ModLoader.addName(soulVase, "Vase of Souls (Block)");
         ModLoader.addName(soulVaseItem, "Vase of Souls");
         ModLoader.addName(gemOfDespair, "Gem of Despair");
         ModLoader.addName(lockWand, "Wand of Imprisonment");
@@ -818,7 +831,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 
     public String getVersion()
     {
-        return "by Vazkii. Version [3.2.1] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
+        return "by Vazkii. Version [3.2.2] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
 
     private static Minecraft mc = ModLoader.getMinecraftInstance();
@@ -845,16 +858,16 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 	
 	private static GuiScreen lastGuiOpen;
     
-    public static final Block darkobsidian;
-    public static final Block quicksand;
-    public static final Block ebonstone;
-    public static final Block ebonblock;
-    public static final Block ebontorch;
-    public static final Block ebonglow;
-    public static final Block soulgemblock;
-    public static final Block bloodCrops;
-    public static final Block phantomChest;
-    public static final Block soulVase;
+    public static Block darkobsidian;
+    public static Block quicksand;
+    public static Block ebonstone;
+    public static Block ebonblock;
+    public static Block ebontorch;
+    public static Block ebonglow;
+    public static Block soulgemblock;
+    public static Block bloodCrops;
+    public static Block phantomChest;
+    public static Block soulVase;
     
     public static int phantomChestRenderID;
 
@@ -909,7 +922,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public static Item gemOfDespair;
     public static Item lockWand;
     
-    public static final Potion magicExhaustion;
+    public static Potion magicExhaustion;
     
     public static Achievement getblade;
     public static Achievement getblock;
@@ -983,24 +996,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static boolean creativeSpawnersEnabled = true;
     @MLProp public static int phantomChestRarity = 2;
     
-     
-    static 
-    {
-        quicksand = (new BlockQuicksand(quicksandID, 3)).setHardness(0.5F).setStepSound(Block.soundSandFootstep).setBlockName("quicksand");
-        ebonstone = (new BlockEbonStone(ebonstoneID, 5)).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundStoneFootstep).setBlockName("ebonstone");
-        ebonblock = (new BlockOreStorageEbon(ebonblockID, 1)).setHardness(2.0F).setResistance(10F).setLightValue(0.8F).setStepSound(Block.soundMetalFootstep).setBlockName("ebonblock");
-        ebontorch = (new BlockEbonTorch(ebontorchID, 6)).setHardness(0.0F).setLightValue(1.0F).setStepSound(Block.soundWoodFootstep).setBlockName("ebontorch").setRequiresSelfNotify();
-        ebonglow = (new BlockEbonGlowstone(ebonglowID, 0, Material.rock)).setHardness(0.3F).setStepSound(Block.soundGlassFootstep).setLightValue(1.0F).setBlockName("ebonglow");
-        darkobsidian = (new BlockEbonObsidian(darkobsidianID, 4)).setHardness(10F).setResistance(2000F).setLightValue(0.8F).setStepSound(Block.soundStoneFootstep).setBlockName("darkobsidian");
-        soulgemblock = (new BlockOreStorageEbon(soulgemblockID, 2)).setHardness(2.0F).setResistance(10F).setLightValue(0.8F).setStepSound(Block.soundMetalFootstep).setBlockName("soulgemblock");
-        bloodCrops = (new BlockBloodLeaf(bloodCropsID, 248)).setHardness(0.0F).setStepSound(Block.soundGrassFootstep).setBlockName("bloodCrops").disableStats().setRequiresSelfNotify();
-        phantomChest = (new BlockPhantomChest(phantomChestID, Material.rock)).setLightValue(0.6F).setBlockUnbreakable().setBlockName("phantomChest");
-        soulVase = (new BlockVaseOfSouls(soulVaseID)).setHardness(0.9F).setStepSound(Block.soundGravelFootstep).setBlockName("soulVase");
-        
-        magicExhaustion  = new Potion(magicExhaustionPotionID, false, 0x65007b).setPotionName("Magical Exhaustion").setIconIndex(0, 1);
-    }
-    
-
     private class ForgeHooks implements IBonemealHandler, IDestroyToolHandler, ISoundHandler{
     	
     	private ForgeHooks(){
