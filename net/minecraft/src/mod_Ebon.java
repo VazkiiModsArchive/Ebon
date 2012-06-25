@@ -71,7 +71,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         dustpile = (new ItemEbonMod(dustpileID)).setIconCoord(2, 5).setItemName("dustpile");
         glowdustEbon = (new ItemEbonMod(glowdustEbonID)).setIconCoord(10, 5).setItemName("glowdustEbon");
         eboncoal = (new ItemEbonMod(eboncoalID)).setIconCoord(9, 5).setItemName("eboncoal");
-        ebonapple = new ItemEbonApple(ebonappleID, 10, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 120, 0, 1.0F).setIconCoord(12, 5).setItemName("ebonapple");
+        ebonapple = new ItemEbonApple(ebonappleID, 20, 1.2F, false).setAlwaysEdible().setPotionEffect(Potion.regeneration.id, 120, 0, 1.0F).setIconCoord(12, 5).setItemName("ebonapple");
         ebonbow = (new ItemEbonBow(ebonbowID)).setIconCoord(8, 5).setItemName("ebonbow");
         soulorb = (new ItemOrbOfSouls(soulorbID, 20)).setIconCoord(2, 6).setItemName("soulorb");
         soulorbc = (new ItemEbonMod(soulorbcID, "Charged")).setMaxStackSize(1).setIconCoord(3, 6).setItemName("soulorbc");
@@ -81,7 +81,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         soulgem = (new ItemEbonMod(soulgemID)).setIconCoord(7, 6).setItemName("soulgem");
         ebonscepter = (new ItemEbonScepter(ebonscepterID, EnumRarity.rare)).setMaxStackSize(1).setIconCoord(8, 6).setItemName("ebonscepter");
         tsEgg = (new ItemTSEgg(tsEggID, "EbonGhost", 0xB3B3B3)).setIconCoord(9, 9).setItemName("tsEgg");
-        fsEgg = (new ItemTSEgg(fsEggID, "Strange Ghost", 0x230B0B)).setIconCoord(9, 9).setItemName("fsEgg");
+        fsEgg = (new ItemTSEgg(fsEggID, "EbonGhostFRG", 0x230B0B)).setIconCoord(9, 9).setItemName("fsEgg");
         mortarPestle = (new ItemGrindstone(mortarPestleID)).setMaxStackSize(1).setIconCoord(9, 6).setItemName("mortarPestle");  
         bloodPowder = (new ItemEbonMod(bloodPowderID)).setIconCoord(11, 6).setItemName("bloodPowder");
         bloodSeeds = (new ItemBloodSeed(bloodSeedsID, bloodCrops.blockID, quicksand.blockID)).setIconCoord(12, 6).setItemName("bloodSeeds");
@@ -177,7 +177,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addName(miniumCharm, "Minium Charm");
         ModLoader.addName(soulVase, "Vase of Souls (Block)");
         ModLoader.addName(soulVaseItem, "Vase of Souls");
-        ModLoader.addName(gemOfDespair, "Gem of Despair");
         ModLoader.addName(lockWand, "Wand of Imprisonment");
         
 		ModLoader.addLocalization("enchantment.level.11", "XI");
@@ -472,8 +471,8 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	EbonAPI.addSimpleStaffOfSoulsEvent("Ghast", "Creeper");
     	EbonAPI.addSimpleStaffOfSoulsEvent("Zombie", "Squid");
     	EbonAPI.addSimpleStaffOfSoulsEvent("Squid", "Zombie");
-    	EbonAPI.addSimpleStaffOfSoulsEvent("EbonGhost", "Strange Ghost");
-    	EbonAPI.addSimpleStaffOfSoulsEvent("Strange Ghost", "EbonGhost");
+    	EbonAPI.addSimpleStaffOfSoulsEvent("EbonGhost", "EbonGhostFRG");
+    	EbonAPI.addSimpleStaffOfSoulsEvent("EbonGhostFRG", "EbonGhost");
     	EbonAPI.addSimpleStaffOfSoulsEvent("SnowMan", "Villager");
     	EbonAPI.addSimpleStaffOfSoulsEvent("Villager", "SnowMan");
     	
@@ -831,7 +830,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 
     public String getVersion()
     {
-        return "by Vazkii. Version [3.2.2] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
+        return "by Vazkii. Version [3.2.3] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
 
     private static Minecraft mc = ModLoader.getMinecraftInstance();
@@ -1064,7 +1063,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 			return entry;
 		}
     }
-
 
 	public String getModName() {
 		return "The Ebon Mod";
