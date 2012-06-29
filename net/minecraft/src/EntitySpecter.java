@@ -47,7 +47,6 @@ public class EntitySpecter extends EntityCreature {
     	if(worldObj.difficultySetting == 0) setDead();
     	
     	if(isVisible()){
-    		ModLoader.getMinecraftInstance().thePlayer.addChatMessage("BOO! " + "Distance: " + getDistanceToEntity(ModLoader.getMinecraftInstance().thePlayer));
     		--ticksVisible;
     		if(getDistanceToEntity(ModLoader.getMinecraftInstance().thePlayer) <= 3.33333333334)
     			teleportRandomly();
