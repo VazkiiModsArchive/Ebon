@@ -30,12 +30,13 @@ public class ItemEbonSword extends ItemSword implements ITextureProvider
 
         if (entity instanceof EntityEbonGhost)
         {
+        	entity.worldObj.playSoundAtEntity(entity, "vazkii.ebonmod.smite", 1.0F, 1.0F);
             return 4000;
         }
         else if ((entity instanceof EntityLiving) && (((EntityLiving)entity).getCreatureAttribute() == EnumCreatureAttribute.UNDEAD && !entity.isDead))
         {
             entity.worldObj.playSoundAtEntity(entity, "vazkii.ebonmod.smite", 1.0F, 1.0F);
-            return ((EntityLiving)entity).getMaxHealth();
+            return ((EntityLiving)entity).getMaxHealth() + (int)Math.ceil(Math.pow(((EntityLiving)entity).getTotalArmorValue(), 2));
         }
         else
         {

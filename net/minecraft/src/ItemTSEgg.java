@@ -5,21 +5,29 @@ import java.util.HashMap;
 public class ItemTSEgg extends Item
 {
     String spawn;
+    int color1;
     int color2;
-    public ItemTSEgg(int i, String s, int c)
+    public ItemTSEgg(int i, String s, int c, int c2)
     {
         super(i);
         setMaxStackSize(1);
         setHasSubtypes(true);
+        setIconCoord(9, 9);
         spawn = s;
-        color2 = c;
+        color1 = c;
+        color2 = c2;
+    }
+    
+    public ItemTSEgg(int i, String s, int c)
+    {
+    	this(i, s, c, 0x191919);
     }
 
     public int getColorFromDamage(int i, int j)
     {
         if (j == 0)
         {
-            return 0x191919;
+            return color1;
         }
 
         return color2;

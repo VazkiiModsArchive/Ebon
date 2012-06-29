@@ -16,8 +16,10 @@ public class NEIEbonModConfig implements IConfigureNEI
         API.setMaxDamageException(mod_Ebon.ebonArmor_Hood.shiftedIndex, 4);
         API.setMaxDamageException(mod_Ebon.ebonArmor_RobeTop.shiftedIndex, 4);
         API.setMaxDamageException(mod_Ebon.necroTome.shiftedIndex, 0);
+        
         API.hideItem(mod_Ebon.mobSpawnerItem.shiftedIndex);
         API.hideItem(mod_Ebon.soulVase.blockID);
+        
         MultiItemRange r = new MultiItemRange();
         r.add(mod_Ebon.mortarPestle);
         r.add(mod_Ebon.corpsedust);
@@ -35,6 +37,7 @@ public class NEIEbonModConfig implements IConfigureNEI
         r.add(mod_Ebon.ebonCloth);
         r.add(mod_Ebon.gemOfDespair);
         API.addSetRange("Vazkii Mods.Ebon Mod.Components", r);
+        
         MultiItemRange r1 = new MultiItemRange();
         r1.add(mod_Ebon.necroTome);
         r1.add(mod_Ebon.ebonstaffc);
@@ -49,6 +52,7 @@ public class NEIEbonModConfig implements IConfigureNEI
         r1.add(mod_Ebon.plusiumCharm);
         r1.add(mod_Ebon.miniumCharm);
         API.addSetRange("Vazkii Mods.Ebon Mod.Tools.Necro Tools", r1);
+        
         MultiItemRange r2 = new MultiItemRange();
         r2.add(mod_Ebon.ebonsword);
         r2.add(mod_Ebon.ebonpick);
@@ -59,10 +63,12 @@ public class NEIEbonModConfig implements IConfigureNEI
         r2.add(mod_Ebon.ebonapple);
         r2.add(mod_Ebon.soulsub);
         API.addSetRange("Vazkii Mods.Ebon Mod.Tools.Other Tools", r2);
+        
         MultiItemRange r3 = new MultiItemRange();
         r3.add(mod_Ebon.ebonArmor_RobeBottom);
         r3.add(mod_Ebon.ebonArmor_Shoes);
         API.addSetRange("Vazkii Mods.Ebon Mod.Armor.Normal Armor", r3);
+        
         MultiItemRange r4 = new MultiItemRange();
         r4.add(new ItemStack(mod_Ebon.ebonArmor_Hood, 1, 1));
         r4.add(new ItemStack(mod_Ebon.ebonArmor_Hood, 1, 2));
@@ -73,6 +79,7 @@ public class NEIEbonModConfig implements IConfigureNEI
         r4.add(new ItemStack(mod_Ebon.ebonArmor_RobeTop, 1, 3));
         r4.add(new ItemStack(mod_Ebon.ebonArmor_RobeTop, 1, 4));
         API.addSetRange("Vazkii Mods.Ebon Mod.Armor.Special Armor", r4);
+        
         MultiItemRange r5 = new MultiItemRange();
         r5.add(mod_Ebon.ebonblock);
         r5.add(mod_Ebon.soulgemblock);
@@ -83,6 +90,7 @@ public class NEIEbonModConfig implements IConfigureNEI
         r5.add(mod_Ebon.phantomChest);
         r5.add(mod_Ebon.soulVaseItem);
         API.addSetRange("Vazkii Mods.Ebon Mod.Blocks", r5);
+        
         MultiItemRange r6 = new MultiItemRange();
         r6.add(mod_Ebon.phantomKey);
         r6.add(mod_Ebon.dustpile);
@@ -92,5 +100,14 @@ public class NEIEbonModConfig implements IConfigureNEI
         r6.add(mod_Ebon.soulstaffu);
         r6.add(mod_Ebon.altarBlueprint);
         API.addSetRange("Vazkii Mods.Ebon Mod.Misc", r6);
+        
+        MultiItemRange r7 = new MultiItemRange();
+        r7.add(mod_Ebon.specterFlute);
+        r7.add(mod_Ebon.specterEssence);
+        r7.add(mod_Ebon.spectralEye);
+        r7.add(mod_Ebon.spectralShield);
+        r7.add(mod_Ebon.spectralMirror);
+        r7.add(mod_Ebon.plDisc);
+        API.addSetRange("Vazkii Mods.Ebon Mod.Tools.Spectral Items", r7);
     }
 }

@@ -31,6 +31,7 @@ public class EntityEbonGhost extends EntityMob
         attackStrength = 16;
         health = 20000; //Only kill with ebon sword
         isImmuneToFire = true;
+        experienceValue = 20;
     }
 
     public int getMaxHealth()

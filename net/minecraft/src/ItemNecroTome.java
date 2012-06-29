@@ -29,7 +29,8 @@ public class ItemNecroTome extends ItemEbonMod
         "Chapter 12: Those circle stone bricks must be able to be made somehow...",
         "Chapter 13: Minium and Plusium Charms seem to be immune to Magical Exhaustion.",
         "Chapter 14: The energy captured by the Vase of Souls must be able to be stored somewhere.",
-        "Chapter 15: Wands of Retrieval and Imprisonment sometimes don't accept certain spawners."
+        "Chapter 15: Wands of Retrieval and Imprisonment sometimes don't accept certain spawners.",
+        "Chapter 16: A revealed Specter will teleport away from possible danger if it's too close,"
     };
 
     private String[] colors = new String[] { "§c", "§9" };

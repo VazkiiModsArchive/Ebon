@@ -15,7 +15,7 @@ public class EntityPhantomChestSpawner extends EntityLiving
     {
         super.onLivingUpdate();
 
-        if (rand.nextInt(10) > 9)
+        if (rand.nextInt(10) > 4)
         {
             worldObj.setBlockWithNotify((int)posX, (int)posY, (int)posZ, mod_Ebon.phantomChest.blockID);
             ((TileEntityPhantomChest)worldObj.getBlockTileEntity((int)posX, (int)posY, (int)posZ)).initializeEntity(new Random());
@@ -40,6 +40,6 @@ public class EntityPhantomChestSpawner extends EntityLiving
 
     public boolean getCanSpawnHere()
     {
-        return (worldObj.worldInfo.getDimension() == 0 || worldObj.worldInfo.getDimension() == 7);
+        return !worldObj.canBlockSeeTheSky((int)Math.floor(posX), (int)Math.floor(posY), (int)Math.floor(posZ)) && (worldObj.worldInfo.getDimension() == 0 || worldObj.worldInfo.getDimension() == 7);
     }
 }

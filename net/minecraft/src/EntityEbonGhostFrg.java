@@ -11,6 +11,7 @@ public class EntityEbonGhostFrg extends EntityEbonGhost
         health = 24000; //Only kill with ebon sword
         moveSpeed = 1.0000001F;
         attackStrength = 21;
+        experienceValue = 25;
     }
 
     public int getMaxHealth()

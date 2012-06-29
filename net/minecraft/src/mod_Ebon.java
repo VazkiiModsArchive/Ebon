@@ -24,7 +24,7 @@ import net.minecraft.client.Minecraft;
 public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 {
 	public void load(){
-    	
+		
     	new ForgeHooks();
     	
     	UMCore.addMod(this);
@@ -32,13 +32,15 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	ModLoader.setInGameHook(this, true, true);
     	ModLoader.setInGUIHook(this, true, true);
     	
-        ModLoader.registerEntityID(net.minecraft.src.EntityEbonGhost.class, "EbonGhost", ModLoader.getUniqueEntityId());
-        ModLoader.registerEntityID(net.minecraft.src.EntityEbonGhostFrg.class, "EbonGhostFRG", ModLoader.getUniqueEntityId());
-        ModLoader.registerEntityID(net.minecraft.src.EntityPhantomChestSpawner.class, "PhantomChestSpawner", ModLoader.getUniqueEntityId());
+        ModLoader.registerEntityID(EntityEbonGhost.class, "EbonGhost", ModLoader.getUniqueEntityId());
+        ModLoader.registerEntityID(EntityEbonGhostFrg.class, "EbonGhostFRG", ModLoader.getUniqueEntityId());
+        ModLoader.registerEntityID(EntitySpecter.class, "EbonSpecter", ModLoader.getUniqueEntityId());
+        ModLoader.registerEntityID(EntityPhantomChestSpawner.class, "PhantomChestSpawner", ModLoader.getUniqueEntityId());
         
         ModLoader.addSpawn("EbonGhost", 24, 1, 5, EnumCreatureType.monster, new BiomeGenBase[] {
             BiomeGenBase.hell
         });
+        ModLoader.addSpawn("EbonSpecter", 10, 4, 4, EnumCreatureType.monster);
         ModLoader.addSpawn("PhantomChestSpawner", phantomChestRarity, 1, 1, EnumCreatureType.monster);
 
         ModLoader.registerTileEntity(TileEntityPhantomChest.class, "TilePhantomChest", new RenderPhantomChest());
@@ -80,8 +82,9 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         sould = (new ItemEbonMod(souldID)).setIconCoord(6, 6).setItemName("sould");
         soulgem = (new ItemEbonMod(soulgemID)).setIconCoord(7, 6).setItemName("soulgem");
         ebonscepter = (new ItemEbonScepter(ebonscepterID, EnumRarity.rare)).setMaxStackSize(1).setIconCoord(8, 6).setItemName("ebonscepter");
-        tsEgg = (new ItemTSEgg(tsEggID, "EbonGhost", 0xB3B3B3)).setIconCoord(9, 9).setItemName("tsEgg");
-        fsEgg = (new ItemTSEgg(fsEggID, "EbonGhostFRG", 0x230B0B)).setIconCoord(9, 9).setItemName("fsEgg");
+        tsEgg = (new ItemTSEgg(tsEggID, "EbonGhost", 0xB3B3B3)).setItemName("tsEgg");
+        fsEgg = (new ItemTSEgg(fsEggID, "EbonGhostFRG", 0x230B0B)).setItemName("fsEgg");
+        specterEgg = (new ItemTSEgg(specterEggID, "EbonSpecter", 0xbfbfbf, 0x727272)).setItemName("specterEgg");
         mortarPestle = (new ItemGrindstone(mortarPestleID)).setMaxStackSize(1).setIconCoord(9, 6).setItemName("mortarPestle");  
         bloodPowder = (new ItemEbonMod(bloodPowderID)).setIconCoord(11, 6).setItemName("bloodPowder");
         bloodSeeds = (new ItemBloodSeed(bloodSeedsID, bloodCrops.blockID, quicksand.blockID)).setIconCoord(12, 6).setItemName("bloodSeeds");
@@ -105,8 +108,15 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         soulVaseItem = (new ItemSoulVaseItem(soulVaseItemID, soulVase)).setIconCoord(13, 7).setItemName("soulVaseItem");
         gemOfDespair = (new ItemEbonMod(gemOfDespairID)).setIconCoord(11, 7).setItemName("gemOfDespair");
         lockWand = (new ItemWandOfImprisonment(lockWandID)).setIconCoord(12, 7).setItemName("lockWand");
+        specterEssence = (new ItemEbonMod(specterEssenceID)).setIconCoord(14, 7).setItemName("specterEssence");
+        specterFlute = (new ItemSpectersFlute(specterFluteID)).setIconCoord(0, 8).setItemName("specterFlute");
+        spectralEye = (new ItemSpecterEye(specterEyeID)).setIconCoord(1, 8).setItemName("spectralEye");
+        spectralMirror = (new ItemSpectralMirror(spectralMirrorID)).setIconCoord(15, 7).setItemName("spectralMirror");
+        spectralShield = (new ItemSpectralShield(spectralShieldID)).setIconCoord(2, 8).setItemName("spectralShield");
+        plDisc = (new ItemPLDisc(plDiscID)).setIconCoord(3, 8).setItemName("plDisc");
 
         magicExhaustion  = new Potion(magicExhaustionPotionID, false, 0x65007b).setPotionName("Magical Exhaustion").setIconIndex(0, 1);
+        spectral = new Potion(spectralPotionID, false, 0xFFFFFF).setPotionName("Spectral").setIconIndex(5, 1);
         
         mortarPestle.setContainerItem(mortarPestle);
         
@@ -154,6 +164,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addName(ebonscepter, "Ebon Scepter");
         ModLoader.addName(tsEgg, "Spawn Tormented Soul");
         ModLoader.addName(fsEgg, "Spawn Forgotten Soul");
+        ModLoader.addName(specterEgg, "Spawn Specter");
         ModLoader.addName(mortarPestle, "Grindstone");
         ModLoader.addName(bloodPowder, "Blood Powder");
         ModLoader.addName(bloodSeeds, "Blood Seeds");
@@ -178,6 +189,12 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         ModLoader.addName(soulVase, "Vase of Souls (Block)");
         ModLoader.addName(soulVaseItem, "Vase of Souls");
         ModLoader.addName(lockWand, "Wand of Imprisonment");
+        ModLoader.addName(specterEssence, "Specter's Essence");
+        ModLoader.addName(specterFlute, "Specter's Flute");
+        ModLoader.addName(spectralEye, "Spectral Eye");
+        ModLoader.addName(spectralMirror, "Spectral Mirror");
+        ModLoader.addName(spectralShield, "Spectral Shield");
+        ModLoader.addName(plDisc, "§6Music Disc");
         
 		ModLoader.addLocalization("enchantment.level.11", "XI");
 		ModLoader.addLocalization("enchantment.level.12", "XII");
@@ -425,9 +442,54 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
         });
         ModLoader.addRecipe(new ItemStack(lockWand, 1), new Object[]{
         	"  G", " S ", "P  ", Character.valueOf('S'), Item.blazeRod, Character.valueOf('G'), gemOfDespair, Character.valueOf('P'), new ItemStack(mobSpawnerItem, 1, -1)
-       });
+        });
         ModLoader.addRecipe(new ItemStack(soulVaseItem, 2), new Object[]{
         	"CSC", "CGC", "CDC", Character.valueOf('C'), Block.blockClay, Character.valueOf('S'), soulStone, Character.valueOf('G'), bloodPowder, Character.valueOf('D'), Item.cauldron
+        });
+        ModLoader.addRecipe(new ItemStack(specterFlute, 1), new Object[]{
+        	"SCS", "CNC", "SCS", Character.valueOf('C'), Block.blockClay, Character.valueOf('N'), Block.music, Character.valueOf('S'), sould
+        });
+        ModLoader.addShapelessRecipe(new ItemStack(spectralEye, 1), new Object[]{
+        	specterEssence, Item.eyeOfEnder, Item.compass
+        });
+        ModLoader.addRecipe(new ItemStack(spectralMirror, 1), new Object[]{
+        	"EOE", "OGO", "EOE", Character.valueOf('E'), specterEssence, Character.valueOf('O'), Block.obsidian, Character.valueOf('G'), Block.glass
+        });
+        ModLoader.addRecipe(new ItemStack(spectralShield, 2), new Object[]{
+        	" E ", "EGE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('G'), Block.glass
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.record11
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.record13
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordBlocks
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordCat
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordChirp
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordFar
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordMall
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordMellohi
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordStal
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordStrad
+        });
+        ModLoader.addRecipe(new ItemStack(plDisc, 1), new Object[]{
+        	" E ", "EDE", " E ", Character.valueOf('E'), specterEssence, Character.valueOf('D'), Item.recordWard
         });
         
         if(!canReforgeArmor) break recipes;
@@ -542,10 +604,11 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Block.sponge), 3); loot.setMaxQtd(12); loot.setMinQtd(4); EbonAPI.addPhantomLoot(loot);
     	loot = new EbonAPI_PhantomChestLoot(new ItemStack(Block.fire), 3); loot.setMaxQtd(8); loot.setMinQtd(4); EbonAPI.addPhantomLoot(loot);
 
-    	//Blacklistd Spawners
+    	//Blacklisted Spawners
     	EbonAPI.blacklistSpawner("VillagerGolem");
     	EbonAPI.blacklistSpawner("EbonGhost");
     	EbonAPI.blacklistSpawner("EbonGhostFRG");
+    	EbonAPI.blacklistSpawner("EbonSpecter");
     	EbonAPI.blacklistSpawner("Slime");
     	EbonAPI.blacklistSpawner("SnowMan");
     	EbonAPI.blacklistSpawner("MushroomCow");
@@ -632,8 +695,22 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     		mc.thePlayer.fallDistance = 0.0F;
     		hasJumpTicked = false;
     	}
-	
-    	//Marked Entity Clearance handler
+    	
+    	//Spectral Potion Effect Handler
+    	if(mc.thePlayer.activePotionsMap.containsKey(spectral.id)){
+    		mc.thePlayer.worldObj.playerEntities.clear();
+    		
+        	List<EntityMob> creaturesList = ModLoader.getMinecraftInstance().theWorld.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(mc.thePlayer.posX-32, mc.thePlayer.posY-32, mc.thePlayer.posZ-32, mc.thePlayer.posX+32, mc.thePlayer.posY+32, mc.thePlayer.posZ+32));
+        	for(EntityMob m : creaturesList)
+        		if(m.getAttackTarget() == mc.thePlayer){
+        			m.setAttackTarget(null);
+        			m.setTarget(null);
+        		}
+    	}
+    	else if(!mc.thePlayer.worldObj.playerEntities.contains(mc.thePlayer))
+				mc.thePlayer.worldObj.playerEntities.add(mc.thePlayer);
+    	
+    	//Marked Entity Clearance Handler
     	for(Entity e : markedEntities){
     		if(e.isDead)
     			markedEntitiesForRemoval.add(e);
@@ -790,7 +867,10 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     
     public boolean onTickInGUI(float f, Minecraft minecraft, GuiScreen guiscreen)
     {
-        if((guiscreen instanceof GuiContainerCreative) && !(lastGuiOpen instanceof GuiContainerCreative) && !minecraft.theWorld.isRemote)
+    	if(mc.theWorld != null && mc.theWorld.playerEntities.isEmpty() && guiscreen != null && guiscreen.doesGuiPauseGame())
+    		mc.theWorld.playerEntities.add(mc.thePlayer);
+    		
+    	if((guiscreen instanceof GuiContainerCreative) && !(lastGuiOpen instanceof GuiContainerCreative) && !minecraft.theWorld.isRemote)
         {
             Container container = ((GuiContainer)guiscreen).inventorySlots;
             List itemList = ((ContainerCreative)container).itemList;
@@ -817,8 +897,9 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     
     public void addRenderer(Map map)
     {
-        map.put(net.minecraft.src.EntityEbonGhost.class, new RenderBiped(new ModelBiped(), 0.5F));
-        map.put(net.minecraft.src.EntityEbonGhostFrg.class, new RenderBiped(new ModelBiped(), 0.5F));
+        map.put(EntityEbonGhost.class, new RenderBiped(new ModelBiped(), 0.5F));
+        map.put(EntityEbonGhostFrg.class, new RenderBiped(new ModelBiped(), 0.5F));
+        map.put(EntitySpecter.class, new RenderSpecter(new ModelBiped(), 0.5F));
     }
     
     public void renderInvBlock(RenderBlocks var1, Block var2, int var3, int var4){
@@ -830,7 +911,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 
     public String getVersion()
     {
-        return "by Vazkii. Version [3.2.3] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
+        return "by Vazkii. Version [3.3] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
 
     private static Minecraft mc = ModLoader.getMinecraftInstance();
@@ -897,6 +978,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public static Item ebonscepter;
     public static Item tsEgg;
     public static Item fsEgg;
+    public static Item specterEgg;
     public static Item wandOfRetrieval;
     public static Item mortarPestle;
     public static Item bloodPowder;
@@ -920,8 +1002,15 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     public static Item soulVaseItem;
     public static Item gemOfDespair;
     public static Item lockWand;
+    public static Item specterEssence;
+    public static Item spectralMirror;
+    public static Item specterFlute;
+    public static Item spectralEye;
+    public static Item spectralShield;
+    public static Item plDisc;
     
     public static Potion magicExhaustion;
+    public static Potion spectral;
     
     public static Achievement getblade;
     public static Achievement getblock;
@@ -963,6 +1052,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static int ebonscepterID = 3153;
     @MLProp public static int tsEggID = 8912;
     @MLProp public static int fsEggID = 8913;
+    @MLProp public static int specterEggID = 8914;
     @MLProp public static int wandOfRetrievalID = 3154;
     @MLProp public static int mortarPestleID = 3155;
     @MLProp public static int bloodPowderID = 3156;
@@ -987,8 +1077,15 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static int soulVaseItemID = 3174;
     @MLProp public static int gemOfDespairID = 3175;
     @MLProp public static int lockWandID = 3176;
+    @MLProp public static int specterEssenceID = 3177;
+    @MLProp public static int spectralMirrorID = 3178;
+    @MLProp public static int specterFluteID = 3179;
+    @MLProp public static int specterEyeID = 3180;
+    @MLProp public static int spectralShieldID = 3181;
+    @MLProp public static int plDiscID = 3182;
     
     @MLProp public static int magicExhaustionPotionID = 27;
+    @MLProp public static int spectralPotionID = 28;
     
     @MLProp public static boolean phantomChestsChunkLoading = true;
     @MLProp public static boolean canReforgeArmor = true;
@@ -1021,7 +1118,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 		}
 
 		public void onLoadSoundSettings(SoundManager soundManager) {
-			File file = ModLoader.getMinecraftInstance().getMinecraftDir();
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/absorb.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/absorb.ogg"));
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/clearExhaustion.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/clearExhaustion.ogg"));
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/fail.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/fail.ogg"));
@@ -1038,6 +1134,8 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/tsDeath.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/tsDeath.ogg"));
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/vase.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/vase.ogg"));
 			soundManager.getSoundsPool().addSound("vazkii/ebonmod/minium.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/minium.ogg"));
+			soundManager.getSoundsPool().addSound("vazkii/ebonmod/spectersFlute.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/spectersFlute.ogg"));
+			soundManager.getStreamingPool().addSound("specterDisc.ogg", mod_Ebon.class.getResource("/vazkii/ebonmod/sfx/specterDisc.ogg"));
 		}
 
 		public SoundPoolEntry onPlayBackgroundMusic(SoundManager soundManager,
