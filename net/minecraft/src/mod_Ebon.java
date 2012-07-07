@@ -9,25 +9,24 @@ import java.util.Random;
 import java.util.List;
 import java.util.Iterator;
 
+import vazkii.um.UpdateManagerMod;
+
 import net.minecraft.src.forge.EnumHelperClient;
 import net.minecraft.src.forge.IBonemealHandler;
 import net.minecraft.src.forge.IDestroyToolHandler;
+import net.minecraft.src.forge.IHighlightHandler;
 import net.minecraft.src.forge.ISoundHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.MinecraftForgeClient;
-import net.minecraft.src.vazkii.updatemanager.IUMAdvanced;
-import net.minecraft.src.vazkii.updatemanager.IUpdateManager;
-import net.minecraft.src.vazkii.updatemanager.ModType;
-import net.minecraft.src.vazkii.updatemanager.UMCore;
+import net.minecraft.src.forge.adaptors.EntityLivingHandlerAdaptor;
 import net.minecraft.client.Minecraft;
 
-public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
+public class mod_Ebon extends BaseMod
 {
 	public void load(){
 		
     	new ForgeHooks();
-    	
-    	UMCore.addMod(this);
+    	new UpdateHandler(this);
 
     	ModLoader.setInGameHook(this, true, true);
     	ModLoader.setInGUIHook(this, true, true);
@@ -695,21 +694,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     		mc.thePlayer.fallDistance = 0.0F;
     		hasJumpTicked = false;
     	}
-    	
-    	//Spectral Potion Effect Handler
-    	if(mc.thePlayer.activePotionsMap.containsKey(spectral.id)){
-    		mc.thePlayer.worldObj.playerEntities.clear();
-    		
-        	List<EntityMob> creaturesList = ModLoader.getMinecraftInstance().theWorld.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(mc.thePlayer.posX-32, mc.thePlayer.posY-32, mc.thePlayer.posZ-32, mc.thePlayer.posX+32, mc.thePlayer.posY+32, mc.thePlayer.posZ+32));
-        	for(EntityMob m : creaturesList)
-        		if(m.getAttackTarget() == mc.thePlayer){
-        			m.setAttackTarget(null);
-        			m.setTarget(null);
-        		}
-    	}
-    	else if(!mc.thePlayer.worldObj.playerEntities.contains(mc.thePlayer))
-				mc.thePlayer.worldObj.playerEntities.add(mc.thePlayer);
-    	
+
     	//Marked Entity Clearance Handler
     	for(Entity e : markedEntities){
     		if(e.isDead)
@@ -747,7 +732,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     	
     	/**Frost Soul**/
     	if(chest.getItemDamage() == 3){
-    	if(playerF == 0){  //posZ is a little derpy when it comes to handling block placement so I just left it alone :)
+    	if(playerF == 0 || playerF == 2){  //posZ is a little derpy when it comes to handling block placement so I just left it alone :)
     	if(mc.theWorld.getBlockId((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ) == Block.waterStill.blockID)
     		mc.theWorld.setBlockWithNotify((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ, Block.ice.blockID);
     	if(mc.theWorld.getBlockId((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ) == Block.lavaStill.blockID)
@@ -758,12 +743,6 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     		mc.theWorld.setBlockWithNotify((int)mc.thePlayer.posX-1, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ, Block.ice.blockID);
     	if(mc.theWorld.getBlockId((int)mc.thePlayer.posX-1, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ) == Block.lavaStill.blockID)
     		mc.theWorld.setBlockWithNotify((int)mc.thePlayer.posX-1, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ, Block.obsidian.blockID);
-    	}
-    	else if(playerF == 2){
-    	if(mc.theWorld.getBlockId((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ) == Block.waterStill.blockID)
-    		mc.theWorld.setBlockWithNotify((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ, Block.ice.blockID);
-    	if(mc.theWorld.getBlockId((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ) == Block.lavaStill.blockID)
-    		mc.theWorld.setBlockWithNotify((int)mc.thePlayer.posX, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ, Block.obsidian.blockID);
     	}
     	else if(playerF == 3){
     	if(mc.theWorld.getBlockId((int)mc.thePlayer.posX+1, (int)mc.thePlayer.posY-2, (int)mc.thePlayer.posZ) == Block.waterStill.blockID)
@@ -866,10 +845,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     }
     
     public boolean onTickInGUI(float f, Minecraft minecraft, GuiScreen guiscreen)
-    {
-    	if(mc.theWorld != null && mc.theWorld.playerEntities.isEmpty() && guiscreen != null && guiscreen.doesGuiPauseGame())
-    		mc.theWorld.playerEntities.add(mc.thePlayer);
-    		
+    {	
     	if((guiscreen instanceof GuiContainerCreative) && !(lastGuiOpen instanceof GuiContainerCreative) && !minecraft.theWorld.isRemote)
         {
             Container container = ((GuiContainer)guiscreen).inventorySlots;
@@ -899,7 +875,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     {
         map.put(EntityEbonGhost.class, new RenderBiped(new ModelBiped(), 0.5F));
         map.put(EntityEbonGhostFrg.class, new RenderBiped(new ModelBiped(), 0.5F));
-        map.put(EntitySpecter.class, new RenderSpecter(new ModelBiped(), 0.5F));
+        map.put(EntitySpecter.class, new RenderSpecter(new ModelBiped()));
     }
     
     public void renderInvBlock(RenderBlocks var1, Block var2, int var3, int var4){
@@ -911,7 +887,7 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 
     public String getVersion()
     {
-        return "by Vazkii. Version [3.3] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
+        return "by Vazkii. Version [3.3.1] for 1.2.5. API Version " + EbonAPI.getAPIVersion() + ".";
     }
 
     private static Minecraft mc = ModLoader.getMinecraftInstance();
@@ -1091,15 +1067,24 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
     @MLProp public static boolean canReforgeArmor = true;
     @MLProp public static boolean creativeSpawnersEnabled = true;
     @MLProp public static int phantomChestRarity = 2;
+    @MLProp(min = 0, max = 100) public static int phantomChestSpawnModifier = 30;
     
-    private class ForgeHooks implements IBonemealHandler, IDestroyToolHandler, ISoundHandler{
+    private class ForgeHooks extends EntityLivingHandlerAdaptor implements IBonemealHandler, IDestroyToolHandler, ISoundHandler{
     	
     	private ForgeHooks(){
         	MinecraftForgeClient.preloadTexture("/vazkii/ebonmod/sprites.png");
         	MinecraftForge.registerBonemealHandler(this);
         	MinecraftForge.registerDestroyToolHandler(this);
         	MinecraftForgeClient.registerSoundHandler(this);
+        	MinecraftForge.registerEntityLivingHandler(this);
 			}
+    	
+        public void onEntityLivingSetAttackTarget(EntityLiving entity, EntityLiving target) 
+        {
+        	if(target != null && target.activePotionsMap.containsKey(spectral.id)){
+        		entity.setAttackTarget(null);
+        	}
+        }
     	
     	public boolean onUseBonemeal(World world, int bid, int i, int j, int k) {
 			if(world.getBlockId(i, j, k) == bloodCrops.blockID){
@@ -1160,25 +1145,37 @@ public class mod_Ebon extends BaseMod implements IUpdateManager, IUMAdvanced
 				float pitch) {
 			return entry;
 		}
+
+		public String onPlaySoundAtEntity(Entity entity, String soundName,
+				float volume, float pitch) {
+			return soundName;
+		}
     }
+    
+    public class UpdateHandler extends UpdateManagerMod {
+    	
+    	public UpdateHandler(cpw.mods.fml.common.modloader.BaseMod m) {
+			super(m);
+		}
 
-	public String getModName() {
-		return "The Ebon Mod";
-	}
+		public String getModName() {
+    		return "The Ebon Mod";
+    	}
 
-	public String getChangelogURL() {
-		return "https://dl.dropbox.com/u/34938401/Mods/On%20Topic/Mods/Ebon/Changelog.txt";
-	}
+    	public String getChangelogURL() {
+    		return "https://dl.dropbox.com/u/34938401/Mods/On%20Topic/Mods/Ebon/Changelog.txt";
+    	}
 
-	public String getUpdateURL() {
-		return "https://dl.dropbox.com/u/34938401/Mods/On%20Topic/Mods/Ebon/Version.txt";
-	}
+    	public String getUpdateURL() {
+    		return "https://dl.dropbox.com/u/34938401/Mods/On%20Topic/Mods/Ebon/Version.txt";
+    	}
 
-	public String getModURL() {
-		return "http://www.minecraftforum.net/topic/528166-123-mlforge-vazkiis-mods-ebonapi-last-updated-12512/";
-	}
-
-	public ModType getModType() {
-		return ModType.UNDEFINED;
-	}
+    	public String getModURL() {
+    		return "http://www.minecraftforum.net/topic/528166-123-mlforge-vazkiis-mods-ebonapi-last-updated-12512/";
+    	}
+    	
+    	public String getUMVersion() {
+    		return "3.3.1";
+    	}
+    }
 }

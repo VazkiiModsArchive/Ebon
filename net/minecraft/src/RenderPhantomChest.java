@@ -24,8 +24,15 @@ public class RenderPhantomChest extends TileEntitySpecialRenderer
         var12 = 1.0F - var12 * var12 * var12;
         chestModel.chestLid.rotateAngleX = -(var12 * (float)Math.PI / 2.0F);
         chestModel.renderAll();
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        int r  = par1TileEntityChest.getRank();
+        String s = r == 1 ? "Bronze" : (r == 2 ? "§7Silver" : (r == 3 ? "§6Gold" : (r == 4 ? "§cMimic" : "")));
+        FontRenderer rend  = getFontRenderer();
+        GL11.glScalef(0.01F, 0.01F, 0.01F);
         GL11.glDisable(GL11.GL_BLEND);
+        if(rend != null && ModLoader.getMinecraftInstance().thePlayer != null && ModLoader.getMinecraftInstance().thePlayer.activePotionsMap.containsKey(mod_Ebon.spectral.id))
+        rend.drawString(s, rend.getStringWidth(s), 0, r == 1 ? 0x4E351F : 0xFFFFFF);
+        GL11.glScalef(1.0F, 1.0F, 1.0F);
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }

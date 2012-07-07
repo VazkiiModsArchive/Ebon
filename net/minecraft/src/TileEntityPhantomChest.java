@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.Set;
 
@@ -50,8 +52,11 @@ public class TileEntityPhantomChest extends TileEntity implements IInventory, IC
     {
         int rankRand = rand.nextInt(100);
         int rank;
-
-        if (rankRand > 89)
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        
+        
+        if (rankRand > 89 || (c.get(2)==3 && c.get(5)==1)) //Happy April Fools!
         {
             rank = 4;
         }

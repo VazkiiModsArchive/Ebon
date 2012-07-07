@@ -3,9 +3,9 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 
 public class RenderSpecter extends RenderBiped {
-
-	public RenderSpecter(ModelBiped par1ModelBiped, float par2) {
-		super(par1ModelBiped, par2);
+	
+	public RenderSpecter(ModelBiped par1ModelBiped) {
+		super(par1ModelBiped, 0.0F);
 	}
 	
 	public void renderSpecter(EntitySpecter specter, double par2, double par4, double par6, float par8, float par9){

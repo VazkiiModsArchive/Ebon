@@ -33,7 +33,7 @@ public class ItemTSEgg extends Item
         return color2;
     }
 
-    public boolean func_46058_c()
+    public boolean requiresMultipleRenderPasses()
     {
         return true;
     }
