@@ -13,7 +13,8 @@ public class RenderVoidInsect extends RenderLiving {
 		super(new ModelSilverfish(), 3F);
 	}
 
-	@Override public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+	@Override
+	public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -22,7 +23,8 @@ public class RenderVoidInsect extends RenderLiving {
 		GL11.glPopMatrix();
 	}
 
-	@Override protected float getDeathMaxRotation(EntityLiving par1EntityLiving) {
+	@Override
+	protected float getDeathMaxRotation(EntityLiving par1EntityLiving) {
 		return 180.0F;
 	}
 

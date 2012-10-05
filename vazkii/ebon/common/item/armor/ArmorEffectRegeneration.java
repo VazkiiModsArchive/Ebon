@@ -17,7 +17,8 @@ public class ArmorEffectRegeneration extends ArmorEffect {
 		return EnumSet.of(ArmorType.HELM);
 	}
 
-	@Override public void onTick(EnumSet<ArmorType> armorType, EntityPlayer player) {
+	@Override
+	public void onTick(EnumSet<ArmorType> armorType, EntityPlayer player) {
 		if (EbonModTickHandler.elapsedTicks % EbonModReference.ARMOR_REGEN_TIME == 0) player.heal(1);
 	}
 

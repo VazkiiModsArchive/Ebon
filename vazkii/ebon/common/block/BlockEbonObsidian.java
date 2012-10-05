@@ -22,7 +22,8 @@ public class BlockEbonObsidian extends BlockContainer {
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 
-	@Override public void randomDisplayTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void randomDisplayTick(World world, int i, int j, int k, Random random) {
 		if (isAltar(world, i, j, k)) for (int it = 0; it < EbonModReference.PARTICLE_COUNT / 8; it++) {
 			double d = i + random.nextDouble();
 			double d1 = j + random.nextDouble() * 0.5F + 1F;
@@ -31,7 +32,8 @@ public class BlockEbonObsidian extends BlockContainer {
 		}
 	}
 
-	@Override public TileEntity createNewTileEntity(World par1World) {
+	@Override
+	public TileEntity createNewTileEntity(World par1World) {
 		return new TileEntityWard(false);
 	}
 

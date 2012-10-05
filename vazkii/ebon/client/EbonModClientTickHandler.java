@@ -30,7 +30,8 @@ public class EbonModClientTickHandler implements ITickHandler {
 	boolean hasMELastTick = false;
 
 	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {}
+	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	}
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
@@ -53,7 +54,12 @@ public class EbonModClientTickHandler implements ITickHandler {
 
 				int xCenter = rez.getScaledWidth() / 2;
 				int yCenter = rez.getScaledHeight() / 2;
-				int x = xCenter - EbonModReference.INVENTORY_DARKNESS_OFFSET + (ClientUtils.getClientPlayer().getActivePotionEffects().isEmpty() /*|| currentScreen instanceof GuiContainerCreative*/? 0 : 60);
+				int x = xCenter - EbonModReference.INVENTORY_DARKNESS_OFFSET + (ClientUtils.getClientPlayer().getActivePotionEffects().isEmpty() /*
+																																				 * ||
+																																				 * currentScreen
+																																				 * instanceof
+																																				 * GuiContainerCreative
+																																				 */? 0 : 60);
 				int y = yCenter - 18 - offsetY;
 
 				RenderHelper.enableStandardItemLighting();

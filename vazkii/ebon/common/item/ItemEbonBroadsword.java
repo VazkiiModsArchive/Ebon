@@ -23,7 +23,8 @@ public class ItemEbonBroadsword extends ItemSword {
 		super(par1, CommonUtils.<EnumToolMaterial> getEnumConstant("EBON", EnumToolMaterial.class));
 	}
 
-	@Override public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
 		if (par2EntityLiving.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) EbonModHelper.addShadeForPlayer((EntityPlayer) par3EntityLiving, EbonModReference.SHADE_SWORD_KILL);
 
 		int level;

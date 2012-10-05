@@ -65,7 +65,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
-@Mod(modid = "ebon_Vz", name = "The Ebon Mod", version = "by Vazkii. Version [4.0] for 1.3.2.") @NetworkMod(channels = { "ebon_Vz", "ebon1_Vz", "ebon2_Vz", "ebon3_Vz", "ebon4_Vz" }, packetHandler = EbonModPacketHandler.class, clientSideRequired = true) public class mod_Ebon {
+@Mod(modid = "ebon_Vz", name = "The Ebon Mod", version = "by Vazkii. Version [4.0.1] for 1.3.2.")
+@NetworkMod(channels = { "ebon_Vz", "ebon1_Vz", "ebon2_Vz", "ebon3_Vz", "ebon4_Vz" }, packetHandler = EbonModPacketHandler.class, clientSideRequired = true)
+public class mod_Ebon {
 
 	@PreInit
 	public void onPreInit(FMLPreInitializationEvent event) {
@@ -187,7 +189,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 		GameRegistry.addRecipe(new ItemStack(staffOfSoulsCharged), "UUU", "USU", "UUU", Character.valueOf('U'), soul, Character.valueOf('S'), staffOfSouls);
 		GameRegistry.addRecipe(new ItemStack(bloodGem), " S ", "SGS", " S ", Character.valueOf('G'), ebonGem, Character.valueOf('S'), demonicSoul);
 		GameRegistry.addRecipe(new ItemStack(ebonScepter), " SG", " BS", "E  ", Character.valueOf('G'), bloodGem, Character.valueOf('S'), demonicSoul, Character.valueOf('E'), ebonGem, Character.valueOf('B'), Item.blazeRod);
-		GameRegistry.addRecipe(new ItemStack(soulGrindstone), "R", "SSS", "RRR", Character.valueOf('R'), Block.stone, Character.valueOf('S'), soul);
+		GameRegistry.addRecipe(new ItemStack(soulGrindstone), "  R", "SSS", "RRR", Character.valueOf('R'), Block.stone, Character.valueOf('S'), soul);
 		GameRegistry.addShapelessRecipe(new ItemStack(bloodPowder, 2), soulGrindstone, bloodGem);
 		GameRegistry.addRecipe(new ItemStack(bloodSeeds, 8), "SSS", "SPS", "SSS", Character.valueOf('S'), Item.seeds, Character.valueOf('P'), bloodPowder);
 		GameRegistry.addShapelessRecipe(new ItemStack(soul), soulGrindstone, bloodLeaf);

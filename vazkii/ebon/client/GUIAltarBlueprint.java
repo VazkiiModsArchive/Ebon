@@ -16,7 +16,8 @@ public class GUIAltarBlueprint extends GuiScreen {
 	private final String[] EXAMINE_MESSAGES = new String[] { "", "Examination of the Scroll reveals that the block in the middle isn't similar to the others.", "Further examination reveals that the floor is an ornament.", "Even further examination reveals that the middle pillar is somehow connecting to the other ones." };
 	private int examineCount;
 
-	@Override public void initGui() {
+	@Override
+	public void initGui() {
 		try {
 			background = TextureFXManager.instance().loadImageFromTexturePack(mc.renderEngine, "/vazkii/ebon/client/resources/scroll.png");
 			mc.renderEngine.setupTexture(background, 1);
@@ -28,11 +29,13 @@ public class GUIAltarBlueprint extends GuiScreen {
 		controlList.add(new GuiButton(1, width / 2 - 30, height / 2 - 150, 60, 20, "Examine"));
 	}
 
-	@Override protected void actionPerformed(GuiButton guibutton) {
+	@Override
+	protected void actionPerformed(GuiButton guibutton) {
 		if (guibutton.id == 1 && examineCount < EXAMINE_MESSAGES.length - 1) examineCount++;
 	}
 
-	@Override public void drawScreen(int par1, int par2, float par3) {
+	@Override
+	public void drawScreen(int par1, int par2, float par3) {
 		if (examineCount >= EXAMINE_MESSAGES.length - 1) controlList.clear();
 
 		drawRect(-mc.fontRenderer.getStringWidth(EXAMINE_MESSAGES[examineCount]), mc.fontRenderer.getStringWidth(EXAMINE_MESSAGES[examineCount]), width / 2, width / 2 - 10, 0x000000);

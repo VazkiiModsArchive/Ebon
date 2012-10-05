@@ -7,4 +7,5 @@ import net.minecraftforge.event.Event;
  * 
  * @author Vazkii
  */
-public abstract class EbonModEvent extends Event {}
+public abstract class EbonModEvent extends Event {
+}

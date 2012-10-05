@@ -22,7 +22,8 @@ public class ItemOrbOfSouls extends ItemSpritesheet {
 		setMaxDamage(EbonModReference.ORB_OF_SOULS_DAMAGE);
 	}
 
-	@Override public boolean itemInteractionForEntity(ItemStack itemstack, EntityLiving entityliving) {
+	@Override
+	public boolean itemInteractionForEntity(ItemStack itemstack, EntityLiving entityliving) {
 		if (entityliving.worldObj instanceof WorldClient) return true;
 
 		EntityPlayer player = EbonModHooks.getInteractingPlayer();

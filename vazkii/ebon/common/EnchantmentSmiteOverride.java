@@ -9,7 +9,8 @@ public class EnchantmentSmiteOverride extends EnchantmentDamage {
 		super(par1, par2, par3);
 	}
 
-	@Override public boolean canEnchantItem(ItemStack item) {
+	@Override
+	public boolean canEnchantItem(ItemStack item) {
 		return item.itemID == mod_Ebon.ebonBroadsword.shiftedIndex ? false : super.canEnchantItem(item);
 	}
 

@@ -26,7 +26,8 @@ public class TileEntityWard extends TileEntity {
 		this.positive = positive;
 	}
 
-	@Override public void updateEntity() {
+	@Override
+	public void updateEntity() {
 
 		if (worldObj instanceof WorldClient || positive && BlockEbonGlowstone.isAltar(worldObj, xCoord, yCoord, zCoord)) return;
 
@@ -35,21 +36,23 @@ public class TileEntityWard extends TileEntity {
 		if (!positive && BlockEbonObsidian.isAltar(worldObj, xCoord, yCoord, zCoord)) {
 			for (Entity e : entities)
 				if (e instanceof EntityPlayer) ((EntityPlayer) e).clearActivePotions();
-					return;
+			return;
 		}
 
 		for (Entity e : entities)
 			if (e instanceof EntityLiving && !(e instanceof EntityPlayer) && !e.isDead || e instanceof EntityItem) if (positive) CommonUtils.moveEntityAwayFromPos(e, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, EbonModReference.WARD_SPEED);
-				else CommonUtils.moveEntityTowardsPos(e, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, EbonModReference.WARD_SPEED);
+			else CommonUtils.moveEntityTowardsPos(e, xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, EbonModReference.WARD_SPEED);
 
 	}
 
-	@Override public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+	@Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 		positive = par1NBTTagCompound.getBoolean("positive");
 	}
 
-	@Override public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
+	@Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setBoolean("positive", positive);
 	}

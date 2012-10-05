@@ -81,8 +81,7 @@ public class EbonModPacketHandler implements IPacketHandler {
 			if (!mpPlayer.inventory.addItemStackToInventory(stack)) mpPlayer.dropPlayerItem(stack);
 			EbonModHelper.setLexiconForPlayer(mpPlayer, false);
 			has = false;
-		}
-		else {
+		} else {
 			has = mpPlayer.inventory.consumeInventoryItem(mod_Ebon.necromancerLexicon.shiftedIndex);
 			EbonModHelper.setLexiconForPlayer(mpPlayer, has);
 		}
@@ -178,6 +177,8 @@ public class EbonModPacketHandler implements IPacketHandler {
 	}
 
 	public static void sendEmptyPacket(String channel) {
+		if (CommonUtils.getMc().thePlayer == null) return;
+
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		new DataOutputStream(byteStream);

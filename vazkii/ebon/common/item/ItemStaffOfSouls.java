@@ -23,7 +23,8 @@ public class ItemStaffOfSouls extends ItemSpritesheet {
 		setMaxDamage(EbonModReference.STAFF_OF_SOULS_DAMAGE);
 	}
 
-	@Override public boolean itemInteractionForEntity(ItemStack itemstack, EntityLiving entityliving) {
+	@Override
+	public boolean itemInteractionForEntity(ItemStack itemstack, EntityLiving entityliving) {
 		EntityPlayer player = EbonModHooks.getInteractingPlayer();
 		System.out.println(entityliving.worldObj);
 		if (entityliving.worldObj instanceof WorldClient) return false;
@@ -42,19 +43,20 @@ public class ItemStaffOfSouls extends ItemSpritesheet {
 					if (!player.inventory.addItemStackToInventory(dropStack)) player.dropPlayerItem(dropStack);
 				}
 			}
-		}
-		else {
+		} else {
 			entityliving.worldObj.playSoundAtEntity(entityliving, "ebonmod.fail", 1.0F, 1.0F);
 			return true;
 		}
 		return true;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 }

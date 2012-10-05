@@ -13,11 +13,13 @@ public class ItemEbonScpeter extends ItemSpritesheet {
 		if (getClass() != ItemEbonScpeter.class) EbonAPIRegistry.registerScepter(this);
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return getClass() != ItemEbonScpeter.class ? EnumRarity.rare : super.getRarity(stack);
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 

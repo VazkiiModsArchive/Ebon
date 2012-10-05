@@ -30,7 +30,8 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 		setFull3D();
 	}
 
-	@Override public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
+	@Override
+	public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		if (par3World instanceof WorldClient || EbonModHelper.doesPlayerHaveME(par2EntityPlayer) || !EbonModHelper.doesPlayerHaveLexicon(par2EntityPlayer) || !EbonModHelper.isDarknessEnough(par2EntityPlayer, EbonModReference.DARKNESS_MIN_WAND_RETRIEVAL)) return true;
 
 		if (par1ItemStack.hasTagCompound()) {
@@ -54,24 +55,22 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 			if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6)) return false;
 
 			else {
-				if (par3World.canPlaceEntityOnSide(Block.mobSpawner.blockID, par4, par5, par6, false, par7, (Entity) null)) {
-					if (par3World.setBlockWithNotify(par4, par5, par6, Block.mobSpawner.blockID)) {
-						if (par3World.getBlockId(par4, par5, par6) == Block.mobSpawner.blockID) {
-							TileEntityMobSpawner spawner = (TileEntityMobSpawner) par3World.getBlockTileEntity(par4, par5, par6);
-							NBTTagCompound cmp = par1ItemStack.getTagCompound();
-							spawner.setMobID(cmp.getString("entityName"));
-							System.out.println("Placing");
-							if (cmp.hasKey("hasExtraInfo") && cmp.getBoolean("hasExtraInfo")) ReflectionHelper.setPrivateValue(TileEntityMobSpawner.class, spawner, cmp.getCompoundTag("extraInfo"), 2);
-							Block.mobSpawner.updateBlockMetadata(par3World, par4, par5, par6, par7, par8, par9, par10);
-							Block.mobSpawner.onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer);
-						}
-
-						par3World.playSoundAtEntity(par2EntityPlayer, "ebonmod.retrieval", 1.0F, 1.0F);
-						par2EntityPlayer.renderBrokenItemStack(par1ItemStack);
-						EbonModHelper.addShadeForPlayer(par2EntityPlayer, EbonModReference.SHADE_STAFF_SOULS);
-						EbonModHelper.addMEToPlayer(par2EntityPlayer, EbonModReference.ME_WAND_RETRIEVAL);
-						--par1ItemStack.stackSize;
+				if (par3World.canPlaceEntityOnSide(Block.mobSpawner.blockID, par4, par5, par6, false, par7, (Entity) null)) if (par3World.setBlockWithNotify(par4, par5, par6, Block.mobSpawner.blockID)) {
+					if (par3World.getBlockId(par4, par5, par6) == Block.mobSpawner.blockID) {
+						TileEntityMobSpawner spawner = (TileEntityMobSpawner) par3World.getBlockTileEntity(par4, par5, par6);
+						NBTTagCompound cmp = par1ItemStack.getTagCompound();
+						spawner.setMobID(cmp.getString("entityName"));
+						System.out.println("Placing");
+						if (cmp.hasKey("hasExtraInfo") && cmp.getBoolean("hasExtraInfo")) ReflectionHelper.setPrivateValue(TileEntityMobSpawner.class, spawner, cmp.getCompoundTag("extraInfo"), 2);
+						Block.mobSpawner.updateBlockMetadata(par3World, par4, par5, par6, par7, par8, par9, par10);
+						Block.mobSpawner.onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer);
 					}
+
+					par3World.playSoundAtEntity(par2EntityPlayer, "ebonmod.retrieval", 1.0F, 1.0F);
+					par2EntityPlayer.renderBrokenItemStack(par1ItemStack);
+					EbonModHelper.addShadeForPlayer(par2EntityPlayer, EbonModReference.SHADE_STAFF_SOULS);
+					EbonModHelper.addMEToPlayer(par2EntityPlayer, EbonModReference.ME_WAND_RETRIEVAL);
+					--par1ItemStack.stackSize;
 				}
 				return true;
 			}
@@ -123,15 +122,18 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 		return true;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 
-	@Override public void addInformation(ItemStack par1ItemStack, List par2List) {
+	@Override
+	public void addInformation(ItemStack par1ItemStack, List par2List) {
 		if (!par1ItemStack.hasTagCompound()) return;
 
 		NBTTagCompound cmp = par1ItemStack.getTagCompound();

@@ -22,7 +22,8 @@ public class ItemPlusiumCharm extends ItemCharmBase {
 		itemstack.getTagCompound().setDouble("accXP", d);
 	}
 
-	@Override public void onXPChange(EntityPlayer player, ItemStack stack, int change) {
+	@Override
+	public void onXPChange(EntityPlayer player, ItemStack stack, int change) {
 		if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
 
 		addXP(stack, (double) change / 4);

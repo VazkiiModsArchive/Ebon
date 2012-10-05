@@ -24,7 +24,8 @@ public class ItemWandOfImprisionment extends ItemSpritesheet {
 		setFull3D();
 	}
 
-	@Override public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
+	@Override
+	public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		if (par3World instanceof WorldClient || EbonModHelper.doesPlayerHaveME(par2EntityPlayer) || !EbonModHelper.doesPlayerHaveLexicon(par2EntityPlayer) || !EbonModHelper.isDarknessEnough(par2EntityPlayer, EbonModReference.DARKNESS_MIN_WAND_IMPRISIONMENT)) return true;
 
 		if (par3World.getBlockId(par4, par5, par6) == Block.mobSpawner.blockID) {
@@ -54,11 +55,13 @@ public class ItemWandOfImprisionment extends ItemSpritesheet {
 		return true;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 

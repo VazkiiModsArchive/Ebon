@@ -33,14 +33,14 @@ public class ItemMiniumCharm extends ItemCharmBase {
 		itemstack.getTagCompound().setInteger("storedXP", i);
 	}
 
-	@Override public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+	@Override
+	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 		if (par1ItemStack.getTagCompound() == null) par1ItemStack.setTagCompound(new NBTTagCompound());
 
 		if (par3Entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) par3Entity;
 
-			extract:
-			{
+			extract: {
 				if (hasMultiples(player)) break extract;
 
 				if (playersExtracting.contains(player) && par2World.getEntitiesWithinAABB(EntityXPOrb.class, AxisAlignedBB.getBoundingBox(par3Entity.posX - 1, par3Entity.posY - 1, par3Entity.posZ - 1, par3Entity.posX + 1, par3Entity.posY + 1, par3Entity.posZ + 1)).size() <= 5) {
@@ -59,14 +59,16 @@ public class ItemMiniumCharm extends ItemCharmBase {
 		}
 	}
 
-	@Override public void onXPChange(EntityPlayer player, ItemStack stack, int change) {
+	@Override
+	public void onXPChange(EntityPlayer player, ItemStack stack, int change) {
 		if (change > 0 && !playersExtracting.contains(player) && !playersNotReset.contains(player)) {
 			player.addExperience(-change);
 			addXP(stack, change);
 		}
 	}
 
-	@Override public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		if (getXP(par1ItemStack) > 0 && !playersExtracting.contains(par3EntityPlayer) && !(par2World instanceof WorldClient)) {
 			playersExtracting.add(par3EntityPlayer);
 			par2World.playSoundAtEntity(par3EntityPlayer, "ebonmod.minium", 1.0F, 1.0F);
@@ -75,7 +77,8 @@ public class ItemMiniumCharm extends ItemCharmBase {
 		return par1ItemStack;
 	}
 
-	@Override public boolean hasEffect(ItemStack par1ItemStack) {
+	@Override
+	public boolean hasEffect(ItemStack par1ItemStack) {
 		return playersExtracting.contains(par1ItemStack);
 	}
 

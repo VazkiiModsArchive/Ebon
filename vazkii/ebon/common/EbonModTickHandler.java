@@ -25,7 +25,8 @@ public class EbonModTickHandler implements ITickHandler {
 	public static HashMap<EntityPlayer, BombEntry> bombMappings = new HashMap();
 
 	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {}
+	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	}
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
@@ -64,7 +65,7 @@ public class EbonModTickHandler implements ITickHandler {
 		int count = 0;
 		for (Item i : EbonAPIRegistry.scepterSet)
 			if (player.inventory.hasItem(i.shiftedIndex)) count++;
-				return count >= 2;
+		return count >= 2;
 	}
 
 	public void handleArmor(List<EntityPlayer> playerList, Object... tickData) {

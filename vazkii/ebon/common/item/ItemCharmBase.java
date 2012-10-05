@@ -46,7 +46,8 @@ public abstract class ItemCharmBase extends ItemSpritesheet {
 		return false;
 	}
 
-	@Override public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+	@Override
+	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 		if (par3Entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) par3Entity;
 			xpNow.put(player, player.experienceTotal);
@@ -64,9 +65,11 @@ public abstract class ItemCharmBase extends ItemSpritesheet {
 		}
 	}
 
-	public void onXPChange(EntityPlayer player, ItemStack stack, int change) {}
+	public void onXPChange(EntityPlayer player, ItemStack stack, int change) {
+	}
 
-	@Override public EnumRarity getRarity(ItemStack itemstack) {
+	@Override
+	public EnumRarity getRarity(ItemStack itemstack) {
 		return EnumRarity.rare;
 	}
 

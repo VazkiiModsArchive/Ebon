@@ -13,11 +13,13 @@ public class ItemBottleOfDarkness extends ItemExpBottle {
 		super(par1);
 	}
 
-	@Override public int getColorFromDamage(int par1, int par2) {
+	@Override
+	public int getColorFromDamage(int par1, int par2) {
 		return 0x3F0037;
 	}
 
-	@Override public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		if (EbonModHelper.doesPlayerHaveME(par3EntityPlayer) || !EbonModHelper.isDarknessEnough(par3EntityPlayer, EbonModReference.DARKNESS_MIN_VASE_SOULS)) return par1ItemStack;
 
 		int var2 = 3 + par2World.rand.nextInt(5) + par2World.rand.nextInt(5);

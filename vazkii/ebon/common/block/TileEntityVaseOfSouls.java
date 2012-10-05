@@ -7,12 +7,14 @@ public class TileEntityVaseOfSouls extends TileEntity {
 
 	int xp = 0;
 
-	@Override public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+	@Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 		xp = par1NBTTagCompound.getInteger("xp");
 	}
 
-	@Override public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
+	@Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setInteger("xp", xp);
 	}

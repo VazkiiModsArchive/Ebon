@@ -34,6 +34,7 @@ public class EbonModCraftingHandler implements ICraftingHandler {
 	}
 
 	@Override
-	public void onSmelting(EntityPlayer player, ItemStack item) {}
+	public void onSmelting(EntityPlayer player, ItemStack item) {
+	}
 
 }

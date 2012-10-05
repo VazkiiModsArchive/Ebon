@@ -16,7 +16,8 @@ public class ItemSoulPowder extends ItemSpritesheet {
 		super(par1);
 	}
 
-	@Override public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
 		if (world instanceof WorldClient) return itemstack;
 
 		Random rand = new Random();
@@ -31,25 +32,20 @@ public class ItemSoulPowder extends ItemSpritesheet {
 			stack = new ItemStack(mod_Ebon.staffShard);
 			gotten = "a strange shard.";
 			rare = true;
-		}
-		else if (chance > 90) {
+		} else if (chance > 90) {
 			stack = new ItemStack(mod_Ebon.ebonGem);
 			gotten = "a Ebon Gem.";
 			rare = true;
-		}
-		else if (chance > 80) {
+		} else if (chance > 80) {
 			stack = new ItemStack(mod_Ebon.undeadEssence);
 			gotten = "some Undead Essence.";
-		}
-		else if (chance2 == 0) {
+		} else if (chance2 == 0) {
 			stack = new ItemStack(Item.bone);
 			gotten = "a Bone.";
-		}
-		else if (chance2 == 1) {
+		} else if (chance2 == 1) {
 			stack = new ItemStack(mod_Ebon.corpseDust);
 			gotten = "some Corpse Dust.";
-		}
-		else {
+		} else {
 			stack = new ItemStack(Item.gunpowder);
 			gotten = "some Gunpowder.";
 		}

@@ -15,7 +15,8 @@ public class ArmorEffectRevitalization extends ArmorEffect {
 		return EnumSet.of(ArmorType.HELM);
 	}
 
-	@Override public void onTick(EnumSet<ArmorType> armorType, EntityPlayer player) {
+	@Override
+	public void onTick(EnumSet<ArmorType> armorType, EntityPlayer player) {
 		if (EbonModTickHandler.elapsedTicks % EbonModReference.ARMOR_REVITALIZAION_TIME == 0) player.getFoodStats().addStats(1, 0.2F);
 	}
 

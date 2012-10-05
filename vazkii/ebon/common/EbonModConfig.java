@@ -54,10 +54,12 @@ public class EbonModConfig extends Configuration {
 	public static final String CATEGORY_OTHERIDS = "otherids";
 	public static TreeMap otherIDsProps = new TreeMap();
 
-	//Props Start ============================================================================
+	// Props Start
+	// ============================================================================
 	public static boolean canReforgeArmor = true;
 
-	//Props Start ============================================================================
+	// Props Start
+	// ============================================================================
 
 	public EbonModConfig(File file) {
 		super(file);

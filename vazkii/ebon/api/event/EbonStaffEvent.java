@@ -5,7 +5,8 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraftforge.event.Cancelable;
 
-@Cancelable public class EbonStaffEvent extends EbonModEvent {
+@Cancelable
+public class EbonStaffEvent extends EbonModEvent {
 
 	public World worldObj;
 	public EntityPlayer player;

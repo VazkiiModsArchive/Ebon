@@ -17,7 +17,8 @@ public class CommandDarkness extends CommandBase {
 		return "darkness";
 	}
 
-	@Override public String getCommandUsage(ICommandSender par1ICommandSender) {
+	@Override
+	public String getCommandUsage(ICommandSender par1ICommandSender) {
 		return "/darkness <level> [player]";
 	}
 
@@ -33,8 +34,7 @@ public class CommandDarkness extends CommandBase {
 
 			EbonModHelper.setDarkness(var3, var4);
 			notifyAdmins(var1, String.format("Set %s's Darkness to %s.", var3.username, var4));
-		}
-		else throw new WrongUsageException("/darkness <level> [player]", new Object[0]);
+		} else throw new WrongUsageException("/darkness <level> [player]", new Object[0]);
 	}
 
 	private EntityPlayer getPlayer(String par1Str) {

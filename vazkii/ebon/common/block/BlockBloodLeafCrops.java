@@ -19,7 +19,8 @@ public class BlockBloodLeafCrops extends BlockCrops {
 		setRequiresSelfNotify();
 	}
 
-	@Override public void fertilize(World world, int i, int j, int k) {
+	@Override
+	public void fertilize(World world, int i, int j, int k) {
 		world.createExplosion(null, i + 0.5F, j + 0.5F, k + 0.5F, 2);
 	}
 
@@ -29,11 +30,13 @@ public class BlockBloodLeafCrops extends BlockCrops {
 		world.setBlockMetadataWithNotify(i, j, k, 7);
 	}
 
-	@Override protected boolean canThisPlantGrowOnThisBlockID(int i) {
+	@Override
+	protected boolean canThisPlantGrowOnThisBlockID(int i) {
 		return i == mod_Ebon.quicksand.blockID;
 	}
 
-	@Override public void randomDisplayTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void randomDisplayTick(World world, int i, int j, int k, Random random) {
 		double d = i + random.nextDouble();
 		double d1 = j + random.nextDouble() * 0.5F + 0.5F;
 		double d2 = k + random.nextDouble();
@@ -76,7 +79,8 @@ public class BlockBloodLeafCrops extends BlockCrops {
 		return var5;
 	}
 
-	@Override public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void updateTick(World world, int i, int j, int k, Random random) {
 		super.updateTick(world, i, j, k, random);
 
 		if (world.getBlockLightValue(i, j, k) <= 5) {
@@ -100,15 +104,18 @@ public class BlockBloodLeafCrops extends BlockCrops {
 		return ret;
 	}
 
-	@Override public int getBlockTextureFromSideAndMetadata(int i, int j) {
+	@Override
+	public int getBlockTextureFromSideAndMetadata(int i, int j) {
 		return blockIndexInTexture + (j < 0 ? 7 : j);
 	}
 
-	@Override public int idDropped(int i, Random random, int j) {
+	@Override
+	public int idDropped(int i, Random random, int j) {
 		return i == 7 ? mod_Ebon.bloodLeaf.shiftedIndex : -1;
 	}
 
-	@Override public int quantityDropped(Random random) {
+	@Override
+	public int quantityDropped(Random random) {
 		return random.nextInt(3);
 	}
 

@@ -23,7 +23,7 @@ public class ArmorEffectThorns extends ArmorEffect {
 			Entity sourceEntity = hurtEvent.source.getEntity();
 			if (sourceEntity == null) return;
 
-			sourceEntity.attackEntityFrom(hurtEvent.source, (int) Math.floor((hurtEvent.ammount / 4)));
+			sourceEntity.attackEntityFrom(hurtEvent.source, (int) Math.floor(hurtEvent.ammount / 4));
 		}
 
 	}

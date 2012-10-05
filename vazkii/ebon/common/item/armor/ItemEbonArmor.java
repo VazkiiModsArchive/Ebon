@@ -26,16 +26,16 @@ public class ItemEbonArmor extends ItemArmor implements IArmorTextureProvider {
 		return EbonModReference.SPRITESHEET_PATH;
 	}
 
-	@Override public void addInformation(ItemStack par1ItemStack, List par2List) {
-		effects:
-		{
-		if (!par1ItemStack.hasTagCompound()) break effects;
+	@Override
+	public void addInformation(ItemStack par1ItemStack, List par2List) {
+		effects: {
+			if (!par1ItemStack.hasTagCompound()) break effects;
 
-		NBTTagCompound cmp = par1ItemStack.getTagCompound();
-		par2List.add(cmp.hasKey("effect") ? ColorCode.GREY + "Soul of " + cmp.getString("effect") : "");
+			NBTTagCompound cmp = par1ItemStack.getTagCompound();
+			par2List.add(cmp.hasKey("effect") ? ColorCode.GREY + "Soul of " + cmp.getString("effect") : "");
 		}
 
-	super.addInformation(par1ItemStack, par2List);
+		super.addInformation(par1ItemStack, par2List);
 	}
 
 	public ArmorType getType() {

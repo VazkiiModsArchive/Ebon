@@ -22,12 +22,14 @@ public class ItemEbonSpade extends ItemSpade {
 		super(par1, CommonUtils.<EnumToolMaterial> getEnumConstant("EBON", EnumToolMaterial.class));
 	}
 
-	@Override public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
+	@Override
+	public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
 		par1ItemStack.damageItem(1, par3EntityLiving);
 		return true;
 	}
 
-	@Override public boolean func_77660_a(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving) {
+	@Override
+	public boolean func_77660_a(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving) {
 		Random random = new Random();
 		Block block = Block.blocksList[par2World.getBlockId(par4, par5, par6)];
 		if (Arrays.asList(blocksEffectiveAgainst).contains(block) && random.nextInt(50) == 0 && !EbonModHelper.doesPlayerHaveME(par7EntityLiving)) {
@@ -41,15 +43,18 @@ public class ItemEbonSpade extends ItemSpade {
 		return super.func_77660_a(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLiving);
 	}
 
-	@Override public EnumAction getItemUseAction(ItemStack par1ItemStack) {
+	@Override
+	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
 		return EnumAction.block;
 	}
 
-	@Override public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+	@Override
+	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 72000;
 	}
 
-	@Override public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
 		return par1ItemStack;
 	}

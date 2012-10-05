@@ -46,9 +46,9 @@ public class ItemDarknessImbiber extends ItemSpritesheet {
 		for (EntityLiving entity : entities)
 			if ((stack = imbibeEntity(entity, stack, par3EntityPlayer)) == null) return stack;
 
-				if (successfulImbibe) EbonModHelper.addMEToPlayer(par3EntityPlayer, EbonModReference.ME_DARKNESS_IMBIBER);
+		if (successfulImbibe) EbonModHelper.addMEToPlayer(par3EntityPlayer, EbonModReference.ME_DARKNESS_IMBIBER);
 
-				return stack;
+		return stack;
 	}
 
 	public ItemStack imbibeEntity(EntityLiving entity, ItemStack stack, EntityPlayer player) {
@@ -72,11 +72,13 @@ public class ItemDarknessImbiber extends ItemSpritesheet {
 		return entity.getHealth() >= entity.getMaxHealth() ? data.hasKey("alreadyImbibed") ? data.getBoolean("alreadyImbibed") : true : false;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 

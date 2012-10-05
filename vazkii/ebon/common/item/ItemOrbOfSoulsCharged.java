@@ -9,7 +9,8 @@ public class ItemOrbOfSoulsCharged extends ItemSpritesheet {
 		super(par1);
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 

@@ -30,8 +30,7 @@ public class ItemZeroScepter extends ItemEbonScpeter {
 			par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.spell", 1.0F, 1.0F);
 			EbonModHelper.addMEToPlayer(player, EbonModReference.ME_SCEPTER);
 			EbonModHelper.addShadeForPlayer(player, EbonModReference.SHADE_SCEPTER);
-		}
-		else par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.fail", 1.0F, 1.0F);
+		} else par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.fail", 1.0F, 1.0F);
 		return true;
 	}
 
