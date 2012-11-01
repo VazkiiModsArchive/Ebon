@@ -2,11 +2,12 @@ package vazkii.ebon.client;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.KeyBinding;
-
 import org.lwjgl.input.Keyboard;
 
 import vazkii.ebon.common.EbonModPacketHandler;
+
+import net.minecraft.src.KeyBinding;
+
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
 

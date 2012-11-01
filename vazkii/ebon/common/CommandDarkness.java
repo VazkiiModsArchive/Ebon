@@ -1,6 +1,8 @@
 package vazkii.ebon.common;
 
+import vazkii.codebase.common.CommonUtils;
 import net.minecraft.server.MinecraftServer;
+
 import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
@@ -8,7 +10,6 @@ import net.minecraft.src.ICommandSender;
 import net.minecraft.src.PlayerNotFoundException;
 import net.minecraft.src.ServerCommandManager;
 import net.minecraft.src.WrongUsageException;
-import vazkii.codebase.common.CommonUtils;
 
 public class CommandDarkness extends CommandBase {
 

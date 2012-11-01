@@ -1,8 +1,9 @@
 package vazkii.ebon.common.item;
 
-import net.minecraft.src.ItemReed;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.mod_Ebon;
+
+import net.minecraft.src.ItemReed;
 
 public class ItemVaseOfSouls extends ItemReed {
 

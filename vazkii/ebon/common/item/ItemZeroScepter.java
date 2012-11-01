@@ -2,17 +2,18 @@ package vazkii.ebon.common.item;
 
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModHooks;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.EbonModTickHandler;
+
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModHooks;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.EbonModTickHandler;
 
 public class ItemZeroScepter extends ItemEbonScpeter {
 
@@ -60,7 +61,7 @@ public class ItemZeroScepter extends ItemEbonScpeter {
 				world.playSoundAtEntity(entity, "random.click", 1.0F, 1.0F);
 				++secondsElapsed;
 				if (secondsElapsed >= maxSeconds) {
-					world.createExplosion(entity, entity.posX, entity.posY, entity.posZ, EbonModReference.ZERO_SCEPTER_POWER);
+					world.createExplosion(entity, entity.posX, entity.posY, entity.posZ, EbonModReference.ZERO_SCEPTER_POWER, true);
 					done = true;
 				}
 			}

@@ -24,6 +24,6 @@ public final class MarkedEntityHelper {
 		Set<Entity> deadEntities = new LinkedHashSet();
 		for (Entity e : markedEntities)
 			if (e.isDead) deadEntities.add(e);
-		markedEntities.removeAll(deadEntities);
+				markedEntities.removeAll(deadEntities);
 	}
 }

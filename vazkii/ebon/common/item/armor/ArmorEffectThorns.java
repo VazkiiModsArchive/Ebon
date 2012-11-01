@@ -2,12 +2,14 @@ package vazkii.ebon.common.item.armor;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityPlayer;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import vazkii.ebon.api.ArmorEffect;
 import vazkii.ebon.api.ArmorType;
+
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityPlayer;
+
+import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class ArmorEffectThorns extends ArmorEffect {
 

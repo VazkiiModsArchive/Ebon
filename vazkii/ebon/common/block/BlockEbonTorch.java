@@ -3,6 +3,12 @@ package vazkii.ebon.common.block;
 import java.util.List;
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.client.ParticleHelper;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.MarkedEntityHelper;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockTorch;
 import net.minecraft.src.CreativeTabs;
@@ -11,11 +17,7 @@ import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityXPOrb;
 import net.minecraft.src.World;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.client.ParticleHelper;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.MarkedEntityHelper;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockEbonTorch extends BlockTorch {

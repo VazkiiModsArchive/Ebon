@@ -2,13 +2,14 @@ package vazkii.ebon.common.item;
 
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.mod_Ebon;
 
 public class ItemSoulPowder extends ItemSpritesheet {
 

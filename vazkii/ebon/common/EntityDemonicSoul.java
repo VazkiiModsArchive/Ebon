@@ -1,7 +1,9 @@
 package vazkii.ebon.common;
 
-import net.minecraft.src.World;
 import vazkii.codebase.common.CommonUtils;
+
+import net.minecraft.src.Entity;
+import net.minecraft.src.World;
 
 public class EntityDemonicSoul extends EntityTormentedSoul {
 
@@ -9,8 +11,12 @@ public class EntityDemonicSoul extends EntityTormentedSoul {
 		super(par1World);
 		health = 24000;
 		moveSpeed = 1F;
-		attackStrength = 18;
 		experienceValue = 30;
+	}
+
+	@Override
+	public int func_82193_c(Entity par1Entity) {
+		return 18;
 	}
 
 	@Override

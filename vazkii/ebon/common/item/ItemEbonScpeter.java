@@ -1,8 +1,9 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.api.EbonAPIRegistry;
+
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
-import vazkii.ebon.api.EbonAPIRegistry;
 
 public class ItemEbonScpeter extends ItemSpritesheet {
 

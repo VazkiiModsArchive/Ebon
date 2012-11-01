@@ -1,8 +1,9 @@
 package vazkii.ebon.client;
 
+import vazkii.codebase.client.ColorRGB;
+
 import net.minecraft.src.EntityFlameFX;
 import net.minecraft.src.World;
-import vazkii.codebase.client.ColorRGB;
 
 public class EntityDarkFlameFX extends EntityFlameFX {
 

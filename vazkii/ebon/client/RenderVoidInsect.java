@@ -1,11 +1,11 @@
 package vazkii.ebon.client;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.ModelSilverfish;
 import net.minecraft.src.RenderLiving;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderVoidInsect extends RenderLiving {
 

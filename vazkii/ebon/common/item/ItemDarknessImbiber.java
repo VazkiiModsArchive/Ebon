@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
@@ -14,9 +18,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemDarknessImbiber extends ItemSpritesheet {
 
@@ -46,9 +47,9 @@ public class ItemDarknessImbiber extends ItemSpritesheet {
 		for (EntityLiving entity : entities)
 			if ((stack = imbibeEntity(entity, stack, par3EntityPlayer)) == null) return stack;
 
-		if (successfulImbibe) EbonModHelper.addMEToPlayer(par3EntityPlayer, EbonModReference.ME_DARKNESS_IMBIBER);
+				if (successfulImbibe) EbonModHelper.addMEToPlayer(par3EntityPlayer, EbonModReference.ME_DARKNESS_IMBIBER);
 
-		return stack;
+				return stack;
 	}
 
 	public ItemStack imbibeEntity(EntityLiving entity, ItemStack stack, EntityPlayer player) {

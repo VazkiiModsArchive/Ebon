@@ -2,6 +2,8 @@ package vazkii.ebon.common.block;
 
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockSand;
 import net.minecraft.src.Entity;
@@ -9,7 +11,6 @@ import net.minecraft.src.EntityFallingSand;
 import net.minecraft.src.EntityItem;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModReference;
 
 public class BlockQuicksand extends BlockSpritesheet {
 

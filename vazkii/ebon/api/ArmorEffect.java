@@ -3,6 +3,7 @@ package vazkii.ebon.api;
 import java.util.EnumSet;
 
 import net.minecraft.src.EntityPlayer;
+
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 public abstract class ArmorEffect {

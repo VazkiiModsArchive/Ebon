@@ -6,15 +6,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
 import vazkii.codebase.common.CommonUtils;
 import vazkii.ebon.api.ArmorType;
 import vazkii.ebon.api.EbonAPIRegistry;
 import vazkii.ebon.common.item.ItemZeroScepter.BombEntry;
+import net.minecraft.server.MinecraftServer;
+
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -65,7 +67,7 @@ public class EbonModTickHandler implements ITickHandler {
 		int count = 0;
 		for (Item i : EbonAPIRegistry.scepterSet)
 			if (player.inventory.hasItem(i.shiftedIndex)) count++;
-		return count >= 2;
+				return count >= 2;
 	}
 
 	public void handleArmor(List<EntityPlayer> playerList, Object... tickData) {

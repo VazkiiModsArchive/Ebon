@@ -4,17 +4,18 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.api.ArmorEffect;
+import vazkii.ebon.api.ArmorType;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.EbonModTickHandler;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IMob;
 import net.minecraft.src.Potion;
 import net.minecraft.src.PotionEffect;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.api.ArmorEffect;
-import vazkii.ebon.api.ArmorType;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.EbonModTickHandler;
 
 public class ArmorEffectDebilitation extends ArmorEffect {
 

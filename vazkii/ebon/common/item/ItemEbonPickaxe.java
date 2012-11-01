@@ -3,6 +3,10 @@ package vazkii.ebon.common.item;
 import java.util.Arrays;
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
@@ -12,9 +16,6 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemPickaxe;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemEbonPickaxe extends ItemPickaxe {
 
@@ -29,7 +30,7 @@ public class ItemEbonPickaxe extends ItemPickaxe {
 	}
 
 	@Override
-	public boolean func_77660_a(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving) {
+	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving) {
 		Random random = new Random();
 		Block block = Block.blocksList[par2World.getBlockId(par4, par5, par6)];
 		if (Arrays.asList(blocksEffectiveAgainst).contains(block) && random.nextInt(50) == 0 && !EbonModHelper.doesPlayerHaveME(par7EntityLiving)) {
@@ -40,7 +41,7 @@ public class ItemEbonPickaxe extends ItemPickaxe {
 			EbonModHelper.addMEToPlayer(par7EntityLiving, EbonModReference.ME_TOOL_USE);
 		}
 
-		return super.func_77660_a(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLiving);
+		return super.onBlockDestroyed(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLiving);
 	}
 
 	@Override

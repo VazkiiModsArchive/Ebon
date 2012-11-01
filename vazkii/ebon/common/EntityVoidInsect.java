@@ -2,6 +2,8 @@ package vazkii.ebon.common;
 
 import java.util.Set;
 
+import vazkii.ebon.common.item.ItemVoidScepter;
+
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityLiving;
@@ -10,7 +12,6 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumCreatureAttribute;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.item.ItemVoidScepter;
 
 public class EntityVoidInsect extends EntityMob {
 
@@ -24,8 +25,12 @@ public class EntityVoidInsect extends EntityMob {
 		texture = "/vazkii/ebon/client/resources/voidInsect.png";
 		setSize(0.3F, 0.7F);
 		moveSpeed = 0.6F;
-		attackStrength = 2;
 		experienceValue = 0;
+	}
+
+	@Override
+	public int func_82193_c(Entity par1Entity) {
+		return 2;
 	}
 
 	public void setTechincalTarget(EntityLiving entity) {
@@ -36,7 +41,7 @@ public class EntityVoidInsect extends EntityMob {
 	protected void attackEntity(Entity par1Entity, float par2) {
 		if (attackTime <= 0 && par2 < 1.2F && par1Entity.boundingBox.maxY > boundingBox.minY && par1Entity.boundingBox.minY < boundingBox.maxY) {
 			attackTime = 20;
-			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), attackStrength);
+			par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), func_82193_c(par1Entity));
 		}
 	}
 

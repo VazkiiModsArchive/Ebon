@@ -1,5 +1,8 @@
 package vazkii.ebon.common;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.item.ItemEbonScpeter;
+
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityMob;
@@ -8,8 +11,6 @@ import net.minecraft.src.EnumCreatureAttribute;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.item.ItemEbonScpeter;
 
 public class EntityTormentedSoul extends EntityMob {
 
@@ -17,10 +18,14 @@ public class EntityTormentedSoul extends EntityMob {
 		super(par1World);
 		texture = "/vazkii/ebon/client/resources/tormentedSoul.png";
 		moveSpeed = CommonUtils.nextIntMinMax(2, 4) * 0.1F;
-		attackStrength = 14;
 		health = 20000;
 		isImmuneToFire = true;
 		experienceValue = 20;
+	}
+
+	@Override
+	public int func_82193_c(Entity par1Entity) {
+		return 14;
 	}
 
 	@Override

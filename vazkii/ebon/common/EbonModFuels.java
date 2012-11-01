@@ -1,6 +1,7 @@
 package vazkii.ebon.common;
 
 import net.minecraft.src.ItemStack;
+
 import cpw.mods.fml.common.IFuelHandler;
 
 public class EbonModFuels implements IFuelHandler {

@@ -1,11 +1,12 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemExpBottle;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemBottleOfDarkness extends ItemExpBottle {
 
@@ -14,7 +15,7 @@ public class ItemBottleOfDarkness extends ItemExpBottle {
 	}
 
 	@Override
-	public int getColorFromDamage(int par1, int par2) {
+	public int func_82790_a(ItemStack par1, int par2) {
 		return 0x3F0037;
 	}
 

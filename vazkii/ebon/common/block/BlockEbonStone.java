@@ -2,6 +2,11 @@ package vazkii.ebon.common.block;
 
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.MarkedEntityHelper;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
@@ -9,10 +14,6 @@ import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityXPOrb;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.MarkedEntityHelper;
 
 public class BlockEbonStone extends BlockSpritesheet {
 

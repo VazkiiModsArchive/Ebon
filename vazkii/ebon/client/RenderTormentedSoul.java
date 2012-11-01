@@ -1,10 +1,10 @@
 package vazkii.ebon.client;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.src.Entity;
 import net.minecraft.src.ModelBiped;
 import net.minecraft.src.RenderBiped;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderTormentedSoul extends RenderBiped {
 

@@ -2,7 +2,16 @@ package vazkii.ebon.client;
 
 import java.util.EnumSet;
 
+import org.lwjgl.opengl.GL11;
+
+import vazkii.codebase.client.ClientUtils;
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
 import net.minecraft.client.Minecraft;
+
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiContainerCreative;
@@ -13,14 +22,6 @@ import net.minecraft.src.RenderHelper;
 import net.minecraft.src.RenderItem;
 import net.minecraft.src.ScaledResolution;
 
-import org.lwjgl.opengl.GL11;
-
-import vazkii.codebase.client.ClientUtils;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -55,11 +56,11 @@ public class EbonModClientTickHandler implements ITickHandler {
 				int xCenter = rez.getScaledWidth() / 2;
 				int yCenter = rez.getScaledHeight() / 2;
 				int x = xCenter - EbonModReference.INVENTORY_DARKNESS_OFFSET + (ClientUtils.getClientPlayer().getActivePotionEffects().isEmpty() /*
-																																				 * ||
-																																				 * currentScreen
-																																				 * instanceof
-																																				 * GuiContainerCreative
-																																				 */? 0 : 60);
+				 * ||
+				 * currentScreen
+				 * instanceof
+				 * GuiContainerCreative
+				 */? 0 : 60);
 				int y = yCenter - 18 - offsetY;
 
 				RenderHelper.enableStandardItemLighting();

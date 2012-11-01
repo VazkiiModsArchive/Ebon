@@ -2,14 +2,16 @@ package vazkii.ebon.common.block;
 
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockEbonGlowstone extends BlockContainer {

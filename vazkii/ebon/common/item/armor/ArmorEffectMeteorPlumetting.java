@@ -4,12 +4,13 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Random;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityPlayer;
 import vazkii.ebon.api.ArmorEffect;
 import vazkii.ebon.api.ArmorType;
 import vazkii.ebon.common.EbonModPacketHandler;
 import vazkii.ebon.common.EbonModReference;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
 
 public strictfp class ArmorEffectMeteorPlumetting extends ArmorEffect {
 
@@ -38,7 +39,7 @@ public strictfp class ArmorEffectMeteorPlumetting extends ArmorEffect {
 			if (player.onGround) {
 				float motion = playersToCrash.get(player);
 				float potency = (motion >= 0 ? motion : -motion) * EbonModReference.ARMOR_METEOR_MOTION_MOD;
-				player.worldObj.createExplosion(player, player.posX, player.posY, player.posZ, potency);
+				player.worldObj.createExplosion(player, player.posX, player.posY, player.posZ, potency, true);
 				playersToCrash.remove(player);
 			}
 		}

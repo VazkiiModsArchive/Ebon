@@ -4,10 +4,11 @@ import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Material;
 import vazkii.ebon.api.ArmorEffect;
 import vazkii.ebon.api.ArmorType;
+
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Material;
 
 public class ArmorEffectRespiration extends ArmorEffect {
 

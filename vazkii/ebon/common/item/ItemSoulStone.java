@@ -1,10 +1,11 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemSoulStone extends ItemSpritesheet {
 

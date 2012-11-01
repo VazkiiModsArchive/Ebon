@@ -1,13 +1,14 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModHooks;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.EntityLightningBolt;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModHooks;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemInfinityScepter extends ItemEbonScpeter {
 

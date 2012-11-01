@@ -3,13 +3,14 @@ package vazkii.ebon.common.block;
 import java.util.ArrayList;
 import java.util.Random;
 
-import net.minecraft.src.BlockCrops;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
 import vazkii.codebase.common.CommonUtils;
 import vazkii.ebon.common.EbonModPacketHandler;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.mod_Ebon;
+
+import net.minecraft.src.BlockCrops;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
 public class BlockBloodLeafCrops extends BlockCrops {
 
@@ -21,7 +22,7 @@ public class BlockBloodLeafCrops extends BlockCrops {
 
 	@Override
 	public void fertilize(World world, int i, int j, int k) {
-		world.createExplosion(null, i + 0.5F, j + 0.5F, k + 0.5F, 2);
+		world.createExplosion(null, i + 0.5F, j + 0.5F, k + 0.5F, 2, true);
 	}
 
 	public static void fertilizePropperly(World world, int i, int j, int k) {

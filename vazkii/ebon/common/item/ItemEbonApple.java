@@ -1,5 +1,8 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemFood;
@@ -7,8 +10,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.Potion;
 import net.minecraft.src.PotionEffect;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemEbonApple extends ItemFood {
 

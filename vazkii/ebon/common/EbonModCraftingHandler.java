@@ -3,15 +3,17 @@ package vazkii.ebon.common;
 import java.util.List;
 import java.util.Random;
 
+import vazkii.ebon.api.ArmorEffect;
+import vazkii.ebon.api.ArmorType;
+import vazkii.ebon.api.EbonAPIRegistry;
+import vazkii.ebon.common.item.armor.ItemEbonArmor;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.api.ArmorEffect;
-import vazkii.ebon.api.ArmorType;
-import vazkii.ebon.api.EbonAPIRegistry;
-import vazkii.ebon.common.item.armor.ItemEbonArmor;
+
 import cpw.mods.fml.common.ICraftingHandler;
 
 public class EbonModCraftingHandler implements ICraftingHandler {

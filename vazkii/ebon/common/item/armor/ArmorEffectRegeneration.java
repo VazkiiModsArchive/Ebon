@@ -2,11 +2,12 @@ package vazkii.ebon.common.item.armor;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.EntityPlayer;
 import vazkii.ebon.api.ArmorEffect;
 import vazkii.ebon.api.ArmorType;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.EbonModTickHandler;
+
+import net.minecraft.src.EntityPlayer;
 
 public class ArmorEffectRegeneration extends ArmorEffect {
 

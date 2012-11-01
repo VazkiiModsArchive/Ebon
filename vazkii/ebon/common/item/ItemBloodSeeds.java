@@ -1,8 +1,9 @@
 package vazkii.ebon.common.item;
 
-import net.minecraft.src.ItemSeeds;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.mod_Ebon;
+
+import net.minecraft.src.ItemSeeds;
 
 public class ItemBloodSeeds extends ItemSeeds {
 

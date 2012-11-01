@@ -1,11 +1,13 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.client.GUIAltarBlueprint;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.client.GUIAltarBlueprint;
+
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemAltarBlueprint extends Item {

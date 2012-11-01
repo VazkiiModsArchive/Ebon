@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.InventoryPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import vazkii.ebon.common.mod_Ebon;
 
 public abstract class ItemCharmBase extends ItemSpritesheet {
 
@@ -36,7 +37,7 @@ public abstract class ItemCharmBase extends ItemSpritesheet {
 		for (ItemStack stack : inv.mainInventory) {
 			if (stack == null) continue;
 
-			if (stack.isStackEqual(new ItemStack(mod_Ebon.plusiumCharm)) || stack.isStackEqual(new ItemStack(mod_Ebon.miniumCharm))) {
+			if (ItemStack.areItemStacksEqual(stack, new ItemStack(mod_Ebon.plusiumCharm)) || ItemStack.areItemStacksEqual(stack, new ItemStack(mod_Ebon.miniumCharm))) {
 				if (found) return true;
 
 				found = true;

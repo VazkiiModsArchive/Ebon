@@ -1,9 +1,11 @@
 package vazkii.ebon.common.block;
 
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
-import vazkii.ebon.common.EbonModReference;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockSpritesheet extends Block {

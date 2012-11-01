@@ -1,5 +1,11 @@
 package vazkii.ebon.common.item;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.EntityTormentedSoul;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.EnchantmentHelper;
 import net.minecraft.src.Entity;
@@ -11,11 +17,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ItemSword;
 import net.minecraft.src.Potion;
 import net.minecraft.src.PotionEffect;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.EntityTormentedSoul;
-import vazkii.ebon.common.mod_Ebon;
 
 public class ItemEbonBroadsword extends ItemSword {
 

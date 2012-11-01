@@ -3,10 +3,10 @@ package vazkii.ebon.client;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
-
-import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.TextureFXManager;
 

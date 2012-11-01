@@ -2,6 +2,14 @@ package vazkii.ebon.common.item;
 
 import java.util.List;
 
+import vazkii.codebase.common.ColorCode;
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.api.EbonAPIRegistry;
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModHooks;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityList;
@@ -13,13 +21,7 @@ import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntityMobSpawner;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.codebase.common.ColorCode;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.api.EbonAPIRegistry;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModHooks;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
+
 import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class ItemWandOfRetrieval extends ItemSpritesheet {
@@ -31,7 +33,7 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 	}
 
 	@Override
-	public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
+	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		if (par3World instanceof WorldClient || EbonModHelper.doesPlayerHaveME(par2EntityPlayer) || !EbonModHelper.doesPlayerHaveLexicon(par2EntityPlayer) || !EbonModHelper.isDarknessEnough(par2EntityPlayer, EbonModReference.DARKNESS_MIN_WAND_RETRIEVAL)) return true;
 
 		if (par1ItemStack.hasTagCompound()) {
@@ -52,7 +54,7 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 				if (par7 == 5) ++par4;
 			}
 
-			if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6)) return false;
+			if (!par3World.canMineBlock(par2EntityPlayer, par4, par5, par6)) return false;
 
 			else {
 				if (par3World.canPlaceEntityOnSide(Block.mobSpawner.blockID, par4, par5, par6, false, par7, (Entity) null)) if (par3World.setBlockWithNotify(par4, par5, par6, Block.mobSpawner.blockID)) {
@@ -133,12 +135,12 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, List par2List) {
+	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 		if (!par1ItemStack.hasTagCompound()) return;
 
 		NBTTagCompound cmp = par1ItemStack.getTagCompound();
-		par2List.add(cmp.hasKey("entityName") ? ColorCode.RED + cmp.getString("entityName") : "");
-		if (cmp.hasKey("hasExtraInfo") && cmp.getBoolean("hasExtraInfo")) par2List.add(ColorCode.BRIGHT_GREEN + "Extra Info");
+		par3List.add(cmp.hasKey("entityName") ? ColorCode.RED + cmp.getString("entityName") : "");
+		if (cmp.hasKey("hasExtraInfo") && cmp.getBoolean("hasExtraInfo")) par3List.add(ColorCode.BRIGHT_GREEN + "Extra Info");
 
 	}
 

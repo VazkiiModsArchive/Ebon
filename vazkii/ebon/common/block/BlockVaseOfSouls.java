@@ -3,6 +3,10 @@ package vazkii.ebon.common.block;
 import java.util.List;
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockCauldron;
 import net.minecraft.src.Entity;
@@ -17,9 +21,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.TileEntityChest;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockVaseOfSouls extends BlockCauldron {
@@ -49,7 +51,7 @@ public class BlockVaseOfSouls extends BlockCauldron {
 		for (Entity e : entities)
 			onEntityCollidedWithBlock(world, i, j, k, e);
 
-		world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
+				world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
 	@Override
