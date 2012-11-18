@@ -65,7 +65,6 @@ public class ItemWandOfRetrieval extends ItemSpritesheet {
 						int somethingFrom14 = Block.mobSpawner.func_85104_a(par3World, par4, par5, par6, par7, par8, par9, par10, 0);
 						if (cmp.hasKey("hasExtraInfo") && cmp.getBoolean("hasExtraInfo")) ReflectionHelper.setPrivateValue(TileEntityMobSpawner.class, spawner, cmp.getCompoundTag("extraInfo"), 2);
 						Block.mobSpawner.func_85105_g(par3World, par4, par5, par6, somethingFrom14);
-						Block.mobSpawner.onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer);
 					}
 
 					par3World.playSoundAtEntity(par2EntityPlayer, "ebonmod.retrieval", 1.0F, 1.0F);
