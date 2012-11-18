@@ -2,15 +2,17 @@ package vazkii.ebon.common.block;
 
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockEbonObsidian extends BlockContainer {
@@ -22,7 +24,8 @@ public class BlockEbonObsidian extends BlockContainer {
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 
-	@Override public void randomDisplayTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void randomDisplayTick(World world, int i, int j, int k, Random random) {
 		if (isAltar(world, i, j, k)) for (int it = 0; it < EbonModReference.PARTICLE_COUNT / 8; it++) {
 			double d = i + random.nextDouble();
 			double d1 = j + random.nextDouble() * 0.5F + 1F;
@@ -31,7 +34,8 @@ public class BlockEbonObsidian extends BlockContainer {
 		}
 	}
 
-	@Override public TileEntity createNewTileEntity(World par1World) {
+	@Override
+	public TileEntity createNewTileEntity(World par1World) {
 		return new TileEntityWard(false);
 	}
 

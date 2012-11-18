@@ -10,7 +10,8 @@ public class ItemSoulGrindstone extends ItemSpritesheet {
 		setContainerItem(this);
 	}
 
-	@Override public boolean doesContainerItemLeaveCraftingGrid(ItemStack stack) {
+	@Override
+	public boolean doesContainerItemLeaveCraftingGrid(ItemStack stack) {
 		return false;
 	}
 

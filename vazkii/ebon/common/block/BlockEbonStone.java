@@ -2,6 +2,11 @@ package vazkii.ebon.common.block;
 
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.MarkedEntityHelper;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Entity;
@@ -9,10 +14,6 @@ import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityXPOrb;
 import net.minecraft.src.Material;
 import net.minecraft.src.World;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.MarkedEntityHelper;
 
 public class BlockEbonStone extends BlockSpritesheet {
 
@@ -21,11 +22,13 @@ public class BlockEbonStone extends BlockSpritesheet {
 		setTickRandomly(true);
 	}
 
-	@Override public boolean isOpaqueCube() {
+	@Override
+	public boolean isOpaqueCube() {
 		return true;
 	}
 
-	@Override public void randomDisplayTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void randomDisplayTick(World world, int i, int j, int k, Random random) {
 		for (int l = 0; l < EbonModReference.PARTICLE_COUNT / 2; l++) {
 			double d = i + random.nextDouble();
 			double d1 = j + random.nextDouble() * 0.5 + 0.733333333;
@@ -34,11 +37,13 @@ public class BlockEbonStone extends BlockSpritesheet {
 		}
 	}
 
-	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
-		return AxisAlignedBB.getBoundingBox(i + 0.0625F, j, k + 0.0625F, (i + 1) - 0.0625F, (j + 1) - 0.0625F, (k + 1) - 0.0625F);
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int i, int j, int k) {
+		return AxisAlignedBB.getBoundingBox(i + 0.0625F, j, k + 0.0625F, i + 1 - 0.0625F, j + 1 - 0.0625F, k + 1 - 0.0625F);
 	}
 
-	@Override public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
+	@Override
+	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
 		if (entity instanceof EntityLiving) {
 			if (((EntityLiving) entity).getHealth() == 1 && !MarkedEntityHelper.isMarked(entity)) {
 				MarkedEntityHelper.markEntity(entity);

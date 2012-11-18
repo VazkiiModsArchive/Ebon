@@ -4,15 +4,16 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModHooks;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.EntityVoidInsect;
+
 import net.minecraft.src.EntityList;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModHooks;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.EntityVoidInsect;
 
 public class ItemVoidScepter extends ItemEbonScpeter {
 
@@ -41,8 +42,7 @@ public class ItemVoidScepter extends ItemEbonScpeter {
 			par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.spell", 1.0F, 1.0F);
 			EbonModHelper.addMEToPlayer(player, EbonModReference.ME_SCEPTER);
 			EbonModHelper.addShadeForPlayer(player, EbonModReference.SHADE_SCEPTER);
-		}
-		else par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.fail", 1.0F, 1.0F);
+		} else par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.fail", 1.0F, 1.0F);
 
 		return true;
 	}

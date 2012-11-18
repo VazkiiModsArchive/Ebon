@@ -2,14 +2,16 @@ package vazkii.ebon.common.block;
 
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.BlockContainer;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockEbonGlowstone extends BlockContainer {
@@ -21,7 +23,8 @@ public class BlockEbonGlowstone extends BlockContainer {
 		setCreativeTab(CreativeTabs.tabBlock);
 	}
 
-	@Override public void randomDisplayTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void randomDisplayTick(World world, int i, int j, int k, Random random) {
 		if (isAltar(world, i, j, k)) for (int it = 0; it < EbonModReference.PARTICLE_COUNT / 4; it++) {
 			double d = i + random.nextDouble();
 			double d1 = j + random.nextDouble() * 0.5F + 0.5F;
@@ -30,11 +33,13 @@ public class BlockEbonGlowstone extends BlockContainer {
 		}
 	}
 
-	@Override public int quantityDropped(Random random) {
+	@Override
+	public int quantityDropped(Random random) {
 		return 2 + random.nextInt(3);
 	}
 
-	@Override public int idDropped(int par1, Random par2Random, int par3) {
+	@Override
+	public int idDropped(int par1, Random par2Random, int par3) {
 		return mod_Ebon.ebonGlowdust.shiftedIndex;
 	}
 

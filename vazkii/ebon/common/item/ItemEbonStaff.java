@@ -1,16 +1,18 @@
 package vazkii.ebon.common.item;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumRarity;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldClient;
-import net.minecraftforge.common.MinecraftForge;
 import vazkii.ebon.api.event.EbonStaffEvent;
 import vazkii.ebon.common.EbonModHelper;
 import vazkii.ebon.common.EbonModPacketHandler;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.mod_Ebon;
+
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumRarity;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldClient;
+
+import net.minecraftforge.common.MinecraftForge;
 
 public class ItemEbonStaff extends ItemSpritesheet {
 
@@ -22,7 +24,8 @@ public class ItemEbonStaff extends ItemSpritesheet {
 		setMaxDamage(EbonModReference.EBON_STAFF_DAMAGE);
 	}
 
-	@Override public boolean tryPlaceIntoWorld(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
+	@Override
+	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
 		if (par3World instanceof WorldClient) return true;
 
 		double d = par2EntityPlayer.posX;
@@ -50,16 +53,17 @@ public class ItemEbonStaff extends ItemSpritesheet {
 				par1ItemStack.damageItem(1, par2EntityPlayer);
 				if (!par2EntityPlayer.inventory.addItemStackToInventory(dropStack)) par2EntityPlayer.dropPlayerItem(dropStack);
 			}
-		}
-		else par3World.playSoundEffect(d, d1, d2, "ebonmod.fail", 1.0F, 1.0F);
+		} else par3World.playSoundEffect(d, d1, d2, "ebonmod.fail", 1.0F, 1.0F);
 		return false;
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 

@@ -3,9 +3,10 @@ package vazkii.ebon.client;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
+import vazkii.codebase.common.CommonUtils;
+
 import net.minecraft.src.EntityFX;
 import net.minecraft.src.World;
-import vazkii.codebase.common.CommonUtils;
 
 public class ParticleHelper {
 

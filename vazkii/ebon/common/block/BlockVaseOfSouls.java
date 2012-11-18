@@ -3,6 +3,10 @@ package vazkii.ebon.common.block;
 import java.util.List;
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModReference;
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockCauldron;
 import net.minecraft.src.Entity;
@@ -17,9 +21,7 @@ import net.minecraft.src.TileEntity;
 import net.minecraft.src.TileEntityChest;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModReference;
-import vazkii.ebon.common.mod_Ebon;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockVaseOfSouls extends BlockCauldron {
@@ -30,7 +32,8 @@ public class BlockVaseOfSouls extends BlockCauldron {
 		GameRegistry.registerBlock(this);
 	}
 
-	@Override public void onBlockAdded(World par1World, int par2, int par3, int par4) {
+	@Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 		par1World.scheduleBlockUpdate(par2, par3, par4, blockID, tickRate());
 		par1World.setBlockTileEntity(par2, par3, par4, createNewTileEntity(par1World));
@@ -40,7 +43,8 @@ public class BlockVaseOfSouls extends BlockCauldron {
 		return new TileEntityVaseOfSouls();
 	}
 
-	@Override public void updateTick(World world, int i, int j, int k, Random random) {
+	@Override
+	public void updateTick(World world, int i, int j, int k, Random random) {
 		List<Entity> entities = world.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(i, j + 1, k, i + 1, j + 1.2, k + 1));
 		entities.addAll(world.getEntitiesWithinAABB(EntityXPOrb.class, AxisAlignedBB.getBoundingBox(i, j + 1, k, i + 1, j + 1.2, k + 1)));
 
@@ -50,20 +54,21 @@ public class BlockVaseOfSouls extends BlockCauldron {
 				world.scheduleBlockUpdate(i, j, k, blockID, tickRate());
 	}
 
-	@Override public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
+	@Override
+	public void onEntityCollidedWithBlock(World world, int i, int j, int k, Entity entity) {
 		if (entity instanceof EntityItem) {
 			IInventory inv = getInventoryAt(world, i, j - 1, k);
 			if (inv != null && placeItemInInventory(inv, ((EntityItem) entity).item)) entity.setDead();
 			else if (!world.isBlockOpaqueCube(i, j - 1, k)) entity.setPosition(entity.posX, entity.posY - 0.666666667, entity.posZ);
-		}
-		else if (entity instanceof EntityXPOrb) {
+		} else if (entity instanceof EntityXPOrb) {
 			TileEntityVaseOfSouls tile = (TileEntityVaseOfSouls) world.getBlockTileEntity(i, j, k);
 			tile.setXP(tile.getXP() + ((EntityXPOrb) entity).getXpValue());
 			entity.setDead();
 		}
 	}
 
-	@Override public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+	@Override
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
 		if (par1World instanceof WorldClient) return true;
 
 		TileEntityVaseOfSouls tile = (TileEntityVaseOfSouls) par1World.getBlockTileEntity(par2, par3, par4);
@@ -84,7 +89,8 @@ public class BlockVaseOfSouls extends BlockCauldron {
 		return true;
 	}
 
-	@Override public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
+	@Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
 		int xp = ((TileEntityVaseOfSouls) par1World.getBlockTileEntity(par2, par3, par4)).getXP();
 
 		if (xp > 0) {
@@ -123,7 +129,7 @@ public class BlockVaseOfSouls extends BlockCauldron {
 
 		if (world.getBlockId(x, y, z - 1) == id) otherChest = (IInventory) world.getBlockTileEntity(x, y, z - 1);
 
-		return (otherChest == null ? chest : new InventoryLargeChest("", chest, otherChest));
+		return otherChest == null ? chest : new InventoryLargeChest("", chest, otherChest);
 	}
 
 	private boolean placeItemInInventory(IInventory inventory, ItemStack item) {
@@ -138,8 +144,7 @@ public class BlockVaseOfSouls extends BlockCauldron {
 				stack.stackSize += item.stackSize;
 				inventory.setInventorySlotContents(slot, stack);
 				return true;
-			}
-			else {
+			} else {
 				inventory.setInventorySlotContents(slot, item);
 				return true;
 			}
@@ -161,7 +166,8 @@ public class BlockVaseOfSouls extends BlockCauldron {
 		return -1;
 	}
 
-	@Override public void onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
+	@Override
+	public void onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
 		super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
 		TileEntity tile = par1World.getBlockTileEntity(par2, par3, par4);
 

@@ -2,6 +2,9 @@ package vazkii.ebon.common.block;
 
 import java.util.List;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityItem;
@@ -10,8 +13,6 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.WorldClient;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.ebon.common.EbonModReference;
 
 public class TileEntityWard extends TileEntity {
 
@@ -26,7 +27,8 @@ public class TileEntityWard extends TileEntity {
 		this.positive = positive;
 	}
 
-	@Override public void updateEntity() {
+	@Override
+	public void updateEntity() {
 
 		if (worldObj instanceof WorldClient || positive && BlockEbonGlowstone.isAltar(worldObj, xCoord, yCoord, zCoord)) return;
 
@@ -44,12 +46,14 @@ public class TileEntityWard extends TileEntity {
 
 	}
 
-	@Override public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+	@Override
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readFromNBT(par1NBTTagCompound);
 		positive = par1NBTTagCompound.getBoolean("positive");
 	}
 
-	@Override public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
+	@Override
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeToNBT(par1NBTTagCompound);
 		par1NBTTagCompound.setBoolean("positive", positive);
 	}

@@ -1,6 +1,8 @@
 package vazkii.ebon.common;
 
+import vazkii.codebase.common.CommonUtils;
 import net.minecraft.server.MinecraftServer;
+
 import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EntityPlayerMP;
@@ -8,7 +10,6 @@ import net.minecraft.src.ICommandSender;
 import net.minecraft.src.PlayerNotFoundException;
 import net.minecraft.src.ServerCommandManager;
 import net.minecraft.src.WrongUsageException;
-import vazkii.codebase.common.CommonUtils;
 
 public class CommandDarkness extends CommandBase {
 
@@ -17,7 +18,8 @@ public class CommandDarkness extends CommandBase {
 		return "darkness";
 	}
 
-	@Override public String getCommandUsage(ICommandSender par1ICommandSender) {
+	@Override
+	public String getCommandUsage(ICommandSender par1ICommandSender) {
 		return "/darkness <level> [player]";
 	}
 
@@ -33,8 +35,7 @@ public class CommandDarkness extends CommandBase {
 
 			EbonModHelper.setDarkness(var3, var4);
 			notifyAdmins(var1, String.format("Set %s's Darkness to %s.", var3.username, var4));
-		}
-		else throw new WrongUsageException("/darkness <level> [player]", new Object[0]);
+		} else throw new WrongUsageException("/darkness <level> [player]", new Object[0]);
 	}
 
 	private EntityPlayer getPlayer(String par1Str) {

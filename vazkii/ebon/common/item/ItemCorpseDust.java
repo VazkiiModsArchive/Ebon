@@ -2,13 +2,14 @@ package vazkii.ebon.common.item;
 
 import java.util.Random;
 
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EnumCreatureAttribute;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemCorpseDust extends Item {
 

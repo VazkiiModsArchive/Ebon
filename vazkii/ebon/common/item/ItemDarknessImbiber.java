@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModPacketHandler;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
@@ -14,9 +18,6 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModPacketHandler;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemDarknessImbiber extends ItemSpritesheet {
 
@@ -72,11 +73,13 @@ public class ItemDarknessImbiber extends ItemSpritesheet {
 		return entity.getHealth() >= entity.getMaxHealth() ? data.hasKey("alreadyImbibed") ? data.getBoolean("alreadyImbibed") : true : false;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
 

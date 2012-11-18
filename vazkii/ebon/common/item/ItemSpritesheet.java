@@ -1,7 +1,8 @@
 package vazkii.ebon.common.item;
 
-import net.minecraft.src.Item;
 import vazkii.ebon.common.EbonModReference;
+
+import net.minecraft.src.Item;
 
 public class ItemSpritesheet extends Item {
 

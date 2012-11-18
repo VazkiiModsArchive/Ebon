@@ -2,16 +2,17 @@ package vazkii.ebon.common.item;
 
 import java.util.Random;
 
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.WorldClient;
 import vazkii.ebon.common.EbonModHelper;
 import vazkii.ebon.common.EbonModHooks;
 import vazkii.ebon.common.EbonModPacketHandler;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.EntityTormentedSoul;
 import vazkii.ebon.common.mod_Ebon;
+
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.WorldClient;
 
 public class ItemOrbOfSouls extends ItemSpritesheet {
 
@@ -22,7 +23,8 @@ public class ItemOrbOfSouls extends ItemSpritesheet {
 		setMaxDamage(EbonModReference.ORB_OF_SOULS_DAMAGE);
 	}
 
-	@Override public boolean itemInteractionForEntity(ItemStack itemstack, EntityLiving entityliving) {
+	@Override
+	public boolean itemInteractionForEntity(ItemStack itemstack, EntityLiving entityliving) {
 		if (entityliving.worldObj instanceof WorldClient) return true;
 
 		EntityPlayer player = EbonModHooks.getInteractingPlayer();

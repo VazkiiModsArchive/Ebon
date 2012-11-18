@@ -2,11 +2,12 @@ package vazkii.ebon.common.item.armor;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.EntityPlayer;
 import vazkii.ebon.api.ArmorEffect;
 import vazkii.ebon.api.ArmorType;
 import vazkii.ebon.common.EbonModReference;
 import vazkii.ebon.common.EbonModTickHandler;
+
+import net.minecraft.src.EntityPlayer;
 
 public class ArmorEffectRegeneration extends ArmorEffect {
 
@@ -17,7 +18,8 @@ public class ArmorEffectRegeneration extends ArmorEffect {
 		return EnumSet.of(ArmorType.HELM);
 	}
 
-	@Override public void onTick(EnumSet<ArmorType> armorType, EntityPlayer player) {
+	@Override
+	public void onTick(EnumSet<ArmorType> armorType, EntityPlayer player) {
 		if (EbonModTickHandler.elapsedTicks % EbonModReference.ARMOR_REGEN_TIME == 0) player.heal(1);
 	}
 

@@ -1,11 +1,13 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.client.GUIAltarBlueprint;
+
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.client.GUIAltarBlueprint;
+
 import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemAltarBlueprint extends Item {
@@ -15,7 +17,8 @@ public class ItemAltarBlueprint extends Item {
 		setMaxStackSize(1);
 	}
 
-	@Override public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		par2World.playSoundAtEntity(par3EntityPlayer, "ebonmod.tome", 1.0F, 1.0F);
 
 		if (par2World instanceof WorldClient) FMLClientHandler.instance().displayGuiScreen(par3EntityPlayer, new GUIAltarBlueprint());
@@ -23,7 +26,8 @@ public class ItemAltarBlueprint extends Item {
 		return par1ItemStack;
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 

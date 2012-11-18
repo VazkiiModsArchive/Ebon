@@ -2,10 +2,11 @@ package vazkii.ebon.common.item.armor;
 
 import java.util.EnumSet;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.EntityPlayer;
 import vazkii.ebon.api.ArmorEffect;
 import vazkii.ebon.api.ArmorType;
+
+import net.minecraft.src.Block;
+import net.minecraft.src.EntityPlayer;
 
 public class ArmorEffectNature extends ArmorEffect {
 

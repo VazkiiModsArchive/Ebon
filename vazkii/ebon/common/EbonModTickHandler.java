@@ -6,15 +6,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
 import vazkii.codebase.common.CommonUtils;
 import vazkii.ebon.api.ArmorType;
 import vazkii.ebon.api.EbonAPIRegistry;
 import vazkii.ebon.common.item.ItemZeroScepter.BombEntry;
+import net.minecraft.server.MinecraftServer;
+
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -25,7 +27,8 @@ public class EbonModTickHandler implements ITickHandler {
 	public static HashMap<EntityPlayer, BombEntry> bombMappings = new HashMap();
 
 	@Override
-	public void tickStart(EnumSet<TickType> type, Object... tickData) {}
+	public void tickStart(EnumSet<TickType> type, Object... tickData) {
+	}
 
 	@Override
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {

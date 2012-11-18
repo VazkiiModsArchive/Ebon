@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import vazkii.ebon.common.mod_Ebon;
+
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.InventoryPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
-import vazkii.ebon.common.mod_Ebon;
 
 public abstract class ItemCharmBase extends ItemSpritesheet {
 
@@ -36,7 +37,7 @@ public abstract class ItemCharmBase extends ItemSpritesheet {
 		for (ItemStack stack : inv.mainInventory) {
 			if (stack == null) continue;
 
-			if (stack.isStackEqual(new ItemStack(mod_Ebon.plusiumCharm)) || stack.isStackEqual(new ItemStack(mod_Ebon.miniumCharm))) {
+			if (ItemStack.areItemStacksEqual(stack, new ItemStack(mod_Ebon.plusiumCharm)) || ItemStack.areItemStacksEqual(stack, new ItemStack(mod_Ebon.miniumCharm))) {
 				if (found) return true;
 
 				found = true;
@@ -46,7 +47,8 @@ public abstract class ItemCharmBase extends ItemSpritesheet {
 		return false;
 	}
 
-	@Override public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+	@Override
+	public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
 		if (par3Entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) par3Entity;
 			xpNow.put(player, player.experienceTotal);
@@ -64,9 +66,11 @@ public abstract class ItemCharmBase extends ItemSpritesheet {
 		}
 	}
 
-	public void onXPChange(EntityPlayer player, ItemStack stack, int change) {}
+	public void onXPChange(EntityPlayer player, ItemStack stack, int change) {
+	}
 
-	@Override public EnumRarity getRarity(ItemStack itemstack) {
+	@Override
+	public EnumRarity getRarity(ItemStack itemstack) {
 		return EnumRarity.rare;
 	}
 

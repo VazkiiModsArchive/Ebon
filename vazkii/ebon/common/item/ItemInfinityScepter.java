@@ -1,13 +1,14 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.common.EbonModHelper;
+import vazkii.ebon.common.EbonModHooks;
+import vazkii.ebon.common.EbonModReference;
+
 import net.minecraft.src.EntityLightningBolt;
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.WorldClient;
-import vazkii.ebon.common.EbonModHelper;
-import vazkii.ebon.common.EbonModHooks;
-import vazkii.ebon.common.EbonModReference;
 
 public class ItemInfinityScepter extends ItemEbonScpeter {
 
@@ -25,8 +26,7 @@ public class ItemInfinityScepter extends ItemEbonScpeter {
 			par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.spell", 1.0F, 1.0F);
 			EbonModHelper.addMEToPlayer(player, EbonModReference.ME_SCEPTER);
 			EbonModHelper.addShadeForPlayer(player, EbonModReference.SHADE_SCEPTER);
-		}
-		else par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.fail", 1.0F, 1.0F);
+		} else par2EntityLiving.worldObj.playSoundEffect(par2EntityLiving.posX, par2EntityLiving.posY, par2EntityLiving.posZ, "ebonmod.fail", 1.0F, 1.0F);
 		return true;
 	}
 

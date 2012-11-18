@@ -6,15 +6,17 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EntityPlayerMP;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.NetworkManager;
-import net.minecraft.src.Packet250CustomPayload;
 import vazkii.codebase.client.ClientUtils;
 import vazkii.codebase.common.CommonUtils;
 import vazkii.ebon.client.EbonModClientTickHandler;
 import vazkii.ebon.client.ParticleHelper;
+
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.INetworkManager;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Packet250CustomPayload;
+
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
@@ -22,7 +24,7 @@ import cpw.mods.fml.common.network.Player;
 public class EbonModPacketHandler implements IPacketHandler {
 
 	@Override
-	public void onPacketData(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		if (packet.channel.equals("ebon_Vz")) onParticlePacket(manager, packet, player);
 		else if (packet.channel.equals("ebon1_Vz")) onDarknessPacket(manager, packet, player);
 		else if (packet.channel.equals("ebon2_Vz")) onDarknessRequestPacket(manager, packet, player);
@@ -30,7 +32,7 @@ public class EbonModPacketHandler implements IPacketHandler {
 		else if (packet.channel.equals("ebon4_Vz")) onLexiconUpdatePacket(manager, packet, player);
 	}
 
-	public void onParticlePacket(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public void onParticlePacket(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		DataInputStream dataStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		try {
 			EntityPlayer entityPlayer = ClientUtils.getClientPlayer();
@@ -51,7 +53,7 @@ public class EbonModPacketHandler implements IPacketHandler {
 		}
 	}
 
-	public static void onDarknessPacket(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public static void onDarknessPacket(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		DataInputStream dataStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		try {
 			EbonModHelper.clientDarkness = dataStream.readInt();
@@ -65,12 +67,12 @@ public class EbonModPacketHandler implements IPacketHandler {
 		}
 	}
 
-	public static void onDarknessRequestPacket(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public static void onDarknessRequestPacket(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
 		sendDarknessPacket(mpPlayer, false);
 	}
 
-	public static void onKeyPacket(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public static void onKeyPacket(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		boolean has;
 		EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
 		if (!EbonModHelper.isDarknessEnough(mpPlayer, EbonModReference.DARKNESS_MIN_LEXICON)) return;
@@ -81,8 +83,7 @@ public class EbonModPacketHandler implements IPacketHandler {
 			if (!mpPlayer.inventory.addItemStackToInventory(stack)) mpPlayer.dropPlayerItem(stack);
 			EbonModHelper.setLexiconForPlayer(mpPlayer, false);
 			has = false;
-		}
-		else {
+		} else {
 			has = mpPlayer.inventory.consumeInventoryItem(mod_Ebon.necromancerLexicon.shiftedIndex);
 			EbonModHelper.setLexiconForPlayer(mpPlayer, has);
 		}
@@ -90,7 +91,7 @@ public class EbonModPacketHandler implements IPacketHandler {
 		sendLexiconUpdatePacket(mpPlayer.username, has);
 	}
 
-	public static void onLexiconUpdatePacket(NetworkManager manager, Packet250CustomPayload packet, Player player) {
+	public static void onLexiconUpdatePacket(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		DataInputStream dataStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		try {
 			EbonModHelper.clientLexicon = dataStream.readBoolean() ? 1 : 0;
@@ -146,7 +147,7 @@ public class EbonModPacketHandler implements IPacketHandler {
 		packet.data = byteStream.toByteArray();
 		packet.length = packet.data.length;
 
-		mpPlayer.serverForThisPlayer.sendPacketToPlayer(packet);
+		mpPlayer.playerNetServerHandler.sendPacketToPlayer(packet);
 	}
 
 	public static void sendRequestDarknessPacket() {
@@ -174,10 +175,12 @@ public class EbonModPacketHandler implements IPacketHandler {
 		packet.data = byteStream.toByteArray();
 		packet.length = packet.data.length;
 
-		mpPlayer.serverForThisPlayer.sendPacketToPlayer(packet);
+		mpPlayer.playerNetServerHandler.sendPacketToPlayer(packet);
 	}
 
 	public static void sendEmptyPacket(String channel) {
+		if (CommonUtils.getMc().thePlayer == null) return;
+
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		new DataOutputStream(byteStream);

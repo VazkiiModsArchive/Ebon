@@ -1,5 +1,26 @@
 package vazkii.ebon.common;
 
+import updatemanager.common.ModConverter;
+import vazkii.codebase.common.CommonUtils;
+import vazkii.codebase.common.EnumVazkiiMods;
+import vazkii.codebase.common.IOUtils;
+import vazkii.codebase.common.mod_Vazcore;
+import vazkii.ebon.api.EbonAPIRegistry;
+import vazkii.ebon.client.EbonModClientTickHandler;
+import vazkii.ebon.client.EbonModKeyHandler;
+import vazkii.ebon.client.RenderTormentedSoul;
+import vazkii.ebon.client.RenderVoidInsect;
+import vazkii.ebon.common.block.TileEntityVaseOfSouls;
+import vazkii.ebon.common.block.TileEntityWard;
+import vazkii.ebon.common.item.armor.ArmorEffectDebilitation;
+import vazkii.ebon.common.item.armor.ArmorEffectFrost;
+import vazkii.ebon.common.item.armor.ArmorEffectMeteorPlumetting;
+import vazkii.ebon.common.item.armor.ArmorEffectNature;
+import vazkii.ebon.common.item.armor.ArmorEffectRegeneration;
+import vazkii.ebon.common.item.armor.ArmorEffectRespiration;
+import vazkii.ebon.common.item.armor.ArmorEffectRevitalization;
+import vazkii.ebon.common.item.armor.ArmorEffectThorns;
+
 import net.minecraft.src.BiomeGenBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.Enchantment;
@@ -28,27 +49,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModelBiped;
 import net.minecraft.src.Potion;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.codebase.common.EnumVazkiiMods;
-import vazkii.codebase.common.IOUtils;
-import vazkii.ebon.api.EbonAPIRegistry;
-import vazkii.ebon.client.EbonModClientTickHandler;
-import vazkii.ebon.client.EbonModKeyHandler;
-import vazkii.ebon.client.RenderTormentedSoul;
-import vazkii.ebon.client.RenderVoidInsect;
-import vazkii.ebon.common.block.TileEntityVaseOfSouls;
-import vazkii.ebon.common.block.TileEntityWard;
-import vazkii.ebon.common.item.armor.ArmorEffectDebilitation;
-import vazkii.ebon.common.item.armor.ArmorEffectFrost;
-import vazkii.ebon.common.item.armor.ArmorEffectMeteorPlumetting;
-import vazkii.ebon.common.item.armor.ArmorEffectNature;
-import vazkii.ebon.common.item.armor.ArmorEffectRegeneration;
-import vazkii.ebon.common.item.armor.ArmorEffectRespiration;
-import vazkii.ebon.common.item.armor.ArmorEffectRevitalization;
-import vazkii.ebon.common.item.armor.ArmorEffectThorns;
-import vazkii.um.common.ModConverter;
+
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
@@ -65,7 +66,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 
-@Mod(modid = "ebon_Vz", name = "The Ebon Mod", version = "by Vazkii. Version [4.0] for 1.3.2.") @NetworkMod(channels = { "ebon_Vz", "ebon1_Vz", "ebon2_Vz", "ebon3_Vz", "ebon4_Vz" }, packetHandler = EbonModPacketHandler.class, clientSideRequired = true) public class mod_Ebon {
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
+
+@Mod(modid = "ebon_Vz", name = "The Ebon Mod", version = "by Vazkii. Version [4.0.3] for 1.4.4/5")
+@NetworkMod(channels = { "ebon_Vz", "ebon1_Vz", "ebon2_Vz", "ebon3_Vz", "ebon4_Vz" }, packetHandler = EbonModPacketHandler.class, clientSideRequired = true)
+public class mod_Ebon {
 
 	@PreInit
 	public void onPreInit(FMLPreInitializationEvent event) {
@@ -74,7 +80,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 
 	@Init
 	public void onInit(FMLInitializationEvent event) {
-		CommonUtils.getMc();
+		mod_Vazcore.loadedVzMods.add(EnumVazkiiMods.EBON.getAcronym());
 		CommonUtils.registerNewToolMaterial("EBON", 3, 1561, 8.0F, 3, 22);
 		CommonUtils.registerNewArmorMaterial("EBON", 0, new int[] { 2, 6, 5, 2 }, 25);
 		new EbonModConfig(IOUtils.getConfigFile(EnumVazkiiMods.EBON));
@@ -187,7 +193,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 		GameRegistry.addRecipe(new ItemStack(staffOfSoulsCharged), "UUU", "USU", "UUU", Character.valueOf('U'), soul, Character.valueOf('S'), staffOfSouls);
 		GameRegistry.addRecipe(new ItemStack(bloodGem), " S ", "SGS", " S ", Character.valueOf('G'), ebonGem, Character.valueOf('S'), demonicSoul);
 		GameRegistry.addRecipe(new ItemStack(ebonScepter), " SG", " BS", "E  ", Character.valueOf('G'), bloodGem, Character.valueOf('S'), demonicSoul, Character.valueOf('E'), ebonGem, Character.valueOf('B'), Item.blazeRod);
-		GameRegistry.addRecipe(new ItemStack(soulGrindstone), "R", "SSS", "RRR", Character.valueOf('R'), Block.stone, Character.valueOf('S'), soul);
+		GameRegistry.addRecipe(new ItemStack(soulGrindstone), "  R", "SSS", "RRR", Character.valueOf('R'), Block.stone, Character.valueOf('S'), soul);
 		GameRegistry.addShapelessRecipe(new ItemStack(bloodPowder, 2), soulGrindstone, bloodGem);
 		GameRegistry.addRecipe(new ItemStack(bloodSeeds, 8), "SSS", "SPS", "SSS", Character.valueOf('S'), Item.seeds, Character.valueOf('P'), bloodPowder);
 		GameRegistry.addShapelessRecipe(new ItemStack(soul), soulGrindstone, bloodLeaf);

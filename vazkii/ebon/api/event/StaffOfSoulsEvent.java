@@ -2,9 +2,11 @@ package vazkii.ebon.api.event;
 
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.ItemStack;
+
 import net.minecraftforge.event.Cancelable;
 
-@Cancelable public class StaffOfSoulsEvent extends EbonModEvent {
+@Cancelable
+public class StaffOfSoulsEvent extends EbonModEvent {
 
 	public ItemStack stack;
 	public EntityLiving entity;

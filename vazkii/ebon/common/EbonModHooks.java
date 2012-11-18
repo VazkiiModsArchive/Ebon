@@ -2,6 +2,12 @@ package vazkii.ebon.common;
 
 import java.util.EnumSet;
 
+import vazkii.ebon.api.ArmorType;
+import vazkii.ebon.api.EbonAPIRegistry;
+import vazkii.ebon.api.event.EbonStaffEvent;
+import vazkii.ebon.api.event.StaffOfSoulsEvent;
+import vazkii.ebon.common.block.BlockBloodLeafCrops;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityItem;
@@ -11,16 +17,12 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.WorldClient;
+
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
-import vazkii.ebon.api.ArmorType;
-import vazkii.ebon.api.EbonAPIRegistry;
-import vazkii.ebon.api.event.EbonStaffEvent;
-import vazkii.ebon.api.event.StaffOfSoulsEvent;
-import vazkii.ebon.common.block.BlockBloodLeafCrops;
 
 public class EbonModHooks {
 
@@ -78,15 +80,12 @@ public class EbonModHooks {
 					if (id == mod_Ebon.bloodLeafCrops.blockID) {
 						handleBLCrops(event);
 						event.setCanceled(true);
-					}
-					else if (id == Block.stoneBrick.blockID) {
+					} else if (id == Block.stoneBrick.blockID) {
 						handleStoneBricks(event);
 						event.setCanceled(true);
-					}
-					else if (id == Block.bookShelf.blockID) {
+					} else if (id == Block.bookShelf.blockID) {
 						if (handleBookshelves(event)) event.setCanceled(true);
-					}
-					else if (EbonAPIRegistry.simpleTransmutations.containsKey(id)) {
+					} else if (EbonAPIRegistry.simpleTransmutations.containsKey(id)) {
 						event.worldObj.setBlockWithNotify(event.posX, event.posY, event.posZ, EbonAPIRegistry.simpleTransmutations.get(id));
 						event.setCanceled(true);
 					}

@@ -9,7 +9,8 @@ public class EnchantmentFireAspectOverride extends EnchantmentFireAspect {
 		super(par1, par2);
 	}
 
-	@Override public boolean canApplyTogether(Enchantment par1Enchantment) {
+	@Override
+	public boolean canApplyTogether(Enchantment par1Enchantment) {
 		return !(par1Enchantment instanceof EnchantmentVenomTouch) && super.canApplyTogether(par1Enchantment);
 	}
 

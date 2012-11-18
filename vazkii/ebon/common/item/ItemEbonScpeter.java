@@ -1,8 +1,9 @@
 package vazkii.ebon.common.item;
 
+import vazkii.ebon.api.EbonAPIRegistry;
+
 import net.minecraft.src.EnumRarity;
 import net.minecraft.src.ItemStack;
-import vazkii.ebon.api.EbonAPIRegistry;
 
 public class ItemEbonScpeter extends ItemSpritesheet {
 
@@ -13,11 +14,13 @@ public class ItemEbonScpeter extends ItemSpritesheet {
 		if (getClass() != ItemEbonScpeter.class) EbonAPIRegistry.registerScepter(this);
 	}
 
-	@Override public EnumRarity getRarity(ItemStack stack) {
+	@Override
+	public EnumRarity getRarity(ItemStack stack) {
 		return getClass() != ItemEbonScpeter.class ? EnumRarity.rare : super.getRarity(stack);
 	}
 
-	@Override public boolean hasEffect(ItemStack stack) {
+	@Override
+	public boolean hasEffect(ItemStack stack) {
 		return true;
 	}
 

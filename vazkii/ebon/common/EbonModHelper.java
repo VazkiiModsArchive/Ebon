@@ -3,14 +3,15 @@ package vazkii.ebon.common;
 import java.io.File;
 import java.util.Random;
 
+import vazkii.codebase.common.CommonUtils;
+import vazkii.codebase.common.EnumVazkiiMods;
+import vazkii.codebase.common.IOUtils;
+
 import net.minecraft.src.EntityLiving;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.PotionEffect;
 import net.minecraft.src.WorldClient;
-import vazkii.codebase.common.CommonUtils;
-import vazkii.codebase.common.EnumVazkiiMods;
-import vazkii.codebase.common.IOUtils;
 
 public class EbonModHelper {
 
